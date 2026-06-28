@@ -9,3 +9,7 @@ handeye_sessions/*/*.png
 *.bag
 *.db3
 handeye_sessions/latest
+calibration/extrinsics/handeye/sessions/*/*.png
+calibration/extrinsics/handeye/sessions/*/live_validation_raw_log.jsonl
+calibration/extrinsics/handeye/sessions/latest
+calibration/extrinsics/handeye/sessions/handeye_sessions/

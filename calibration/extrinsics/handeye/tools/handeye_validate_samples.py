@@ -32,9 +32,9 @@ def rot_angle_deg(r_a, r_b):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--samples', default='/home/z/Apps-my/handeye_samples/samples.jsonl')
-    parser.add_argument('--result', default='/home/z/Apps-my/handeye_samples/handeye_result.yaml')
-    parser.add_argument('--output', default='/home/z/Apps-my/handeye_samples/base_target_validation.csv')
+    parser.add_argument('--samples', default='/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/samples.jsonl')
+    parser.add_argument('--result', default='/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/handeye_result.yaml')
+    parser.add_argument('--output', default='/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/base_target_validation.csv')
     args = parser.parse_args()
 
     samples = load_samples(args.samples)

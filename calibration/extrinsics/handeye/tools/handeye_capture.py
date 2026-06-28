@@ -209,8 +209,8 @@ def next_sample_id(samples_file):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--image-topic', default='/camera/color/image_raw')
-    parser.add_argument('--intrinsics', default='/home/z/Apps-my/rgb_intrinsics_640x360.yaml')
-    parser.add_argument('--output-dir', type=Path, default=Path('/home/z/Apps-my/handeye_samples'))
+    parser.add_argument('--intrinsics', default='/home/z/Apps-my/calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml')
+    parser.add_argument('--output-dir', type=Path, default=Path('/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples'))
     parser.add_argument('--samples-file', type=Path, default=None)
     parser.add_argument('--base-frame', default='base')
     parser.add_argument('--tool-frame', default='tool0')

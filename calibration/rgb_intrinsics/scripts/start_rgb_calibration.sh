@@ -9,4 +9,4 @@ exec ros2 run charuco_camera_calibration charuco_intrinsics --ros-args \
   -p marker_length_m:=0.018 \
   -p dictionary_id:=DICT_6X6_1000 \
   -p start_id:=233 \
-  -p output_file:=/home/z/Apps-my/rgb_intrinsics_640x360.yaml
+  -p output_file:=/home/z/Apps-my/calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml

@@ -24,6 +24,6 @@ print('OpenCV hand-eye support: OK')
 PY
 
 echo "Checking key files..."
-test -f /home/z/Apps-my/rgb_intrinsics_640x360.yaml
-test -x /home/z/Apps-my/start_dabai_camera.sh
+test -f /home/z/Apps-my/calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml
+test -x /home/z/Apps-my/scripts/camera/start_dabai_camera.sh
 echo "Environment looks ready."

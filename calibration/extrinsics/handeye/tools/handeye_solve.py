@@ -104,8 +104,8 @@ def estimate_residuals(samples, t_tool_camera):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--samples', default='/home/z/Apps-my/handeye_samples/samples.jsonl')
-    parser.add_argument('--output', default='/home/z/Apps-my/handeye_samples/handeye_result.yaml')
+    parser.add_argument('--samples', default='/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/samples.jsonl')
+    parser.add_argument('--output', default='/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/handeye_result.yaml')
     parser.add_argument('--method', choices=sorted(METHODS), default='tsai')
     args = parser.parse_args()
 

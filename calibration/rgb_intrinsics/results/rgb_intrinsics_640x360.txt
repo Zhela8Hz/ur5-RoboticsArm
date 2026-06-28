@@ -32,6 +32,6 @@ Distortion coefficients (k1, k2, p1, p2, k3)
 -0.0003894957
 0.0787438837
 
-Source YAML: /home/z/Apps-my/rgb_intrinsics_640x360.yaml
+Source YAML: /home/z/Apps-my/calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml
 Calibration board: ChArUco 6x6, 25 mm squares, 18 mm markers,
 DICT_6X6_1000, start_id=233.

@@ -1,11 +1,11 @@
 2026-06-26 hand-eye calibration summary
 
-session=/home/z/Apps-my/handeye_sessions/20260626_004119
-result=/home/z/Apps-my/handeye_sessions/20260626_004119/handeye_result.yaml
-validation_csv=/home/z/Apps-my/handeye_sessions/20260626_004119/base_target_validation.csv
-live_validation_raw_log=/home/z/Apps-my/handeye_sessions/20260626_004119/live_validation_raw_log.jsonl
+session=/home/z/Apps-my/calibration/extrinsics/handeye/sessions/20260626_004119
+result=/home/z/Apps-my/calibration/extrinsics/handeye/sessions/20260626_004119/handeye_result.yaml
+validation_csv=/home/z/Apps-my/calibration/extrinsics/handeye/sessions/20260626_004119/base_target_validation.csv
+live_validation_raw_log=/home/z/Apps-my/calibration/extrinsics/handeye/sessions/20260626_004119/live_validation_raw_log.jsonl
 
-robot_kinematics=/home/z/Apps-my/ur5_actual_calibration.yaml
+robot_kinematics=/home/z/Apps-my/configs/robot/ur5_actual_calibration.yaml
 robot_calibration_checksum=calib_17294063568689657538
 robot_calibration_status=checked_successfully
 

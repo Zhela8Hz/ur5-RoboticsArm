@@ -6,7 +6,7 @@
 
 ```bash
 cd /home/z/Apps-my
-./handeye_check_env.sh
+./calibration/extrinsics/handeye/tools/handeye_check_env.sh
 ```
 
 ## 1. 启动相机
@@ -15,7 +15,7 @@ cd /home/z/Apps-my
 
 ```bash
 cd /home/z/Apps-my
-./start_dabai_camera.sh
+./scripts/camera/start_dabai_camera.sh
 ```
 
 终端 2 检查图像：
@@ -35,7 +35,7 @@ ros2 topic hz /camera/color/image_raw
 
 ```bash
 cd /home/z/Apps-my
-./start_ur5_driver.sh
+./scripts/robot/start_ur5_driver.sh
 ```
 
 在示教器上打开包含 External Control 节点的程序，并按 Play。
@@ -44,7 +44,7 @@ cd /home/z/Apps-my
 
 ```bash
 cd /home/z/Apps-my
-./check_ur5_state.sh
+./scripts/robot/check_ur5_state.sh
 ```
 
 如果 `tool0` 查不到，先确认实际末端 frame 名称。
@@ -55,7 +55,7 @@ cd /home/z/Apps-my
 
 ```bash
 cd /home/z/Apps-my
-./start_handeye_capture.sh
+./calibration/extrinsics/handeye/scripts/start_handeye_capture.sh
 ```
 
 每次移动机械臂到一个新姿态后：
@@ -70,9 +70,9 @@ cd /home/z/Apps-my
 采集输出：
 
 ```text
-/home/z/Apps-my/handeye_samples/samples.jsonl
-/home/z/Apps-my/handeye_samples/sample_XXX_raw.png
-/home/z/Apps-my/handeye_samples/sample_XXX_overlay.png
+/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/samples.jsonl
+/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/sample_XXX_raw.png
+/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/sample_XXX_overlay.png
 ```
 
 ## 4. 求解外参
@@ -81,13 +81,13 @@ cd /home/z/Apps-my
 
 ```bash
 cd /home/z/Apps-my
-./solve_handeye.sh
+./calibration/extrinsics/handeye/scripts/solve_handeye.sh
 ```
 
 输出：
 
 ```text
-/home/z/Apps-my/handeye_samples/handeye_result.yaml
+/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/handeye_result.yaml
 ```
 
 核心结果是：
