@@ -1,0 +1,27 @@
+ .../scripts/start_ir_calibration.sh                | 13 [32m++++[m[31m--[m
+ .../extrinsics/handeye/scripts/solve_handeye.sh    | 14 [32m++++[m[31m--[m
+ .../handeye/scripts/solve_latest_handeye_retake.sh | 12 [32m++++[m[31m--[m
+ .../handeye/scripts/start_handeye_capture.sh       | 16 [32m++++[m[31m---[m
+ .../handeye/scripts/start_handeye_live_validate.sh | 16 [32m++++[m[31m---[m
+ .../scripts/start_handeye_retake_capture.sh        | 18 [32m+++++[m[31m---[m
+ .../handeye/scripts/validate_handeye_samples.sh    | 14 [32m++++[m[31m--[m
+ .../20260626_004119/base_target_validation.csv     | 50 [32m+++++++++++[m[31m-----------[m
+ .../20260626_004119/handeye_calibration_result.txt | 18 [32m++++[m[31m----[m
+ .../handeye_calibration_summary.log                | 10 [32m++[m[31m---[m
+ .../handeye/sessions/20260626_004119/samples.jsonl | 50 [32m+++++++++++[m[31m-----------[m
+ .../extrinsics/handeye/tools/handeye_capture.py    |  7 [32m++[m[31m-[m
+ .../extrinsics/handeye/tools/handeye_check_env.sh  | 14 [32m++++[m[31m--[m
+ .../handeye/tools/handeye_live_validate.py         |  9 [32m++[m[31m--[m
+ .../extrinsics/handeye/tools/handeye_solve.py      |  7 [32m++[m[31m-[m
+ .../handeye/tools/handeye_validate_samples.py      |  9 [32m++[m[31m--[m
+ .../results/rgb_intrinsics_640x360.txt             |  2 [32m+[m[31m-[m
+ .../scripts/capture_rgb_calibration.sh             |  9 [32m+++[m[31m-[m
+ .../scripts/finish_rgb_calibration.sh              |  9 [32m+++[m[31m-[m
+ .../scripts/start_rgb_calibration.sh               | 11 [32m++++[m[31m-[m
+ docs/HANDEYE_OPERATION.md                          | 24 [32m+++++[m[31m------[m
+ docs/ROS2_HUMBLE_PROGRESS.md                       | 18 [32m++++[m[31m----[m
+ scripts/camera/start_dabai_camera.sh               | 10 [32m++++[m[31m-[m
+ scripts/camera/start_dabai_ir_camera.sh            | 10 [32m++++[m[31m-[m
+ scripts/robot/check_ur5_state.sh                   |  8 [32m+++[m[31m-[m
+ scripts/robot/start_ur5_driver.sh                  | 10 [32m++++[m[31m-[m
+ 26 files changed, 247 insertions(+), 141 deletions(-)

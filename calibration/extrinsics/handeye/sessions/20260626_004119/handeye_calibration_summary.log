@@ -1,0 +1,35 @@
+2026-06-26 hand-eye calibration summary
+
+session=calibration/extrinsics/handeye/sessions/20260626_004119
+result=calibration/extrinsics/handeye/sessions/20260626_004119/handeye_result.yaml
+validation_csv=calibration/extrinsics/handeye/sessions/20260626_004119/base_target_validation.csv
+live_validation_raw_log=calibration/extrinsics/handeye/sessions/20260626_004119/live_validation_raw_log.jsonl
+
+robot_kinematics=configs/robot/ur5_actual_calibration.yaml
+robot_calibration_checksum=calib_17294063568689657538
+robot_calibration_status=checked_successfully
+
+sample_count=25
+charuco_corners_min=22
+charuco_corners_max=25
+charuco_corners_mean=24.64
+
+T_tool_camera_translation_m=[0.0652314244, -0.0071898034, 0.0094051179]
+T_tool_camera_translation_mm=[65.23, -7.19, 9.41]
+
+solver_translation_mean_mm=2.18
+solver_translation_max_mm=4.09
+solver_rotation_mean_deg=0.493
+solver_rotation_max_deg=0.902
+
+csv_scatter_translation_mean_mm=1.24
+csv_scatter_translation_max_mm=2.46
+csv_scatter_rotation_mean_deg=0.47
+csv_scatter_rotation_max_deg=0.90
+
+live_validation_latest_scatter_mean_mm=1.39
+live_validation_latest_scatter_max_mm=2.34
+live_validation_latest_rot_mean_deg=0.32
+live_validation_latest_rot_max_deg=0.61
+
+status=PASS
