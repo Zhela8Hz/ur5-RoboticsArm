@@ -19,6 +19,9 @@ from sensor_msgs.msg import Image
 from tf2_ros import Buffer, TransformException, TransformListener
 
 
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+
+
 def load_intrinsics(path):
     data = yaml.safe_load(Path(path).read_text(encoding='utf-8'))
     camera_matrix = np.array(data['camera_matrix']['data'], dtype=np.float64).reshape(3, 3)
@@ -157,8 +160,8 @@ class LiveValidator(Node):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--image-topic', default='/camera/color/image_raw')
-    parser.add_argument('--intrinsics', default='/home/z/Apps-my/calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml')
-    parser.add_argument('--handeye', default='/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/handeye_result_gt20_no32.yaml')
+    parser.add_argument('--intrinsics', default=str(PROJECT_ROOT / 'calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml'))
+    parser.add_argument('--handeye', default=str(PROJECT_ROOT / 'calibration/extrinsics/handeye/sessions/handeye_samples/handeye_result_gt20_no32.yaml'))
     parser.add_argument('--base-frame', default='base')
     parser.add_argument('--tool-frame', default='tool0')
     parser.add_argument('--squares-x', type=int, default=6)
@@ -169,7 +172,7 @@ def main():
     parser.add_argument('--start-id', type=int, default=233)
     parser.add_argument('--min-charuco-corners', type=int, default=20)
     parser.add_argument('--tf-timeout-sec', type=float, default=0.5)
-    parser.add_argument('--output', default='/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/live_validation.jsonl')
+    parser.add_argument('--output', default=str(PROJECT_ROOT / 'calibration/extrinsics/handeye/sessions/handeye_samples/live_validation.jsonl'))
     args = parser.parse_args()
 
     rclpy.init()

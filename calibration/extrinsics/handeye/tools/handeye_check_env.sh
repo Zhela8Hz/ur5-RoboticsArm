@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null || true)"
+if [ -z "${PROJECT_ROOT}" ]; then
+  PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../../../.." && pwd)"
+fi
+
 source /opt/ros/humble/setup.bash
-source /home/z/Apps-my/ros2_ws/install/setup.bash
-export ROS_LOG_DIR=/home/z/Apps-my/.ros-log
+source "${PROJECT_ROOT}/ros2_ws/install/setup.bash"
+export ROS_LOG_DIR="${PROJECT_ROOT}/.ros-log"
 mkdir -p "${ROS_LOG_DIR}"
 
 echo "ROS distro: ${ROS_DISTRO:-unknown}"
@@ -24,6 +30,6 @@ print('OpenCV hand-eye support: OK')
 PY
 
 echo "Checking key files..."
-test -f /home/z/Apps-my/calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml
-test -x /home/z/Apps-my/scripts/camera/start_dabai_camera.sh
+test -f "${PROJECT_ROOT}/calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml"
+test -x "${PROJECT_ROOT}/scripts/camera/start_dabai_camera.sh"
 echo "Environment looks ready."

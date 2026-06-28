@@ -21,6 +21,9 @@ from sensor_msgs.msg import Image
 from tf2_ros import Buffer, TransformException, TransformListener
 
 
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+
+
 def load_intrinsics(path):
     data = yaml.safe_load(Path(path).read_text(encoding='utf-8'))
     camera_matrix = np.array(data['camera_matrix']['data'], dtype=np.float64).reshape(3, 3)
@@ -209,8 +212,8 @@ def next_sample_id(samples_file):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--image-topic', default='/camera/color/image_raw')
-    parser.add_argument('--intrinsics', default='/home/z/Apps-my/calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml')
-    parser.add_argument('--output-dir', type=Path, default=Path('/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples'))
+    parser.add_argument('--intrinsics', default=str(PROJECT_ROOT / 'calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml'))
+    parser.add_argument('--output-dir', type=Path, default=PROJECT_ROOT / 'calibration/extrinsics/handeye/sessions/handeye_samples')
     parser.add_argument('--samples-file', type=Path, default=None)
     parser.add_argument('--base-frame', default='base')
     parser.add_argument('--tool-frame', default='tool0')

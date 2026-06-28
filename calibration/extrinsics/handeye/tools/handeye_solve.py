@@ -10,6 +10,9 @@ import numpy as np
 import yaml
 
 
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+
+
 METHODS = {
     'tsai': cv2.CALIB_HAND_EYE_TSAI,
     'park': cv2.CALIB_HAND_EYE_PARK,
@@ -104,8 +107,8 @@ def estimate_residuals(samples, t_tool_camera):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--samples', default='/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/samples.jsonl')
-    parser.add_argument('--output', default='/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/handeye_result.yaml')
+    parser.add_argument('--samples', default=str(PROJECT_ROOT / 'calibration/extrinsics/handeye/sessions/handeye_samples/samples.jsonl'))
+    parser.add_argument('--output', default=str(PROJECT_ROOT / 'calibration/extrinsics/handeye/sessions/handeye_samples/handeye_result.yaml'))
     parser.add_argument('--method', choices=sorted(METHODS), default='tsai')
     args = parser.parse_args()
 

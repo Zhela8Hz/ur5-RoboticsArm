@@ -8,7 +8,7 @@
 ### 相机驱动与硬件验证
 
 - 设备已确认：Orbbec DaBai DCW，USB ID `2bc5:0659`，序列号 `CH2TC42007T`，固件 `RD2460`。
-- 系统预装的 SDK v2 驱动不适配该型号；已在 `/home/z/Apps-my/ros2_ws` 构建官方 `OrbbecSDK_ROS2 v1.5.15` overlay。
+- 系统预装的 SDK v2 驱动不适配该型号；已在仓库内 `ros2_ws` 构建官方 `OrbbecSDK_ROS2 v1.5.15` overlay。
 - 该 overlay 使用 `OrbbecSDK v1.10.35`，与 OrbbecViewer 已验证可用的 SDK v1.10 同代。
 - 真实设备启动验证通过：RGB、深度流可启动；当前 USB 链路为 USB 2.0。
 
@@ -34,7 +34,7 @@
 - 图像模式：RGB `640×360 @ 10 fps`。
 - 有效采集：25 张。
 - RMS 重投影误差：`0.2232757 px`，结果可用。
-- 输出文件：`/home/z/Apps-my/calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml`。
+- 输出文件：`calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml`。
 - RGB 内参：`fx=349.3258006`，`fy=348.7786042`，`cx=320.1061644`，`cy=174.3310865`。
 
 ### IR / 深度侧状态
@@ -55,12 +55,12 @@
 
 ### 当前可用脚本
 
-- RGB 相机：`/home/z/Apps-my/scripts/camera/start_dabai_camera.sh`
-- RGB 标定：`/home/z/Apps-my/calibration/rgb_intrinsics/scripts/start_rgb_calibration.sh`
-- IR 相机：`/home/z/Apps-my/scripts/camera/start_dabai_ir_camera.sh`
-- IR 标定：`/home/z/Apps-my/calibration/depth_intrinsics/scripts/start_ir_calibration.sh`
-- 采集服务：`/home/z/Apps-my/calibration/rgb_intrinsics/scripts/capture_rgb_calibration.sh`
-- 计算服务：`/home/z/Apps-my/calibration/rgb_intrinsics/scripts/finish_rgb_calibration.sh`
+- RGB 相机：`scripts/camera/start_dabai_camera.sh`
+- RGB 标定：`calibration/rgb_intrinsics/scripts/start_rgb_calibration.sh`
+- IR 相机：`scripts/camera/start_dabai_ir_camera.sh`
+- IR 标定：`calibration/depth_intrinsics/scripts/start_ir_calibration.sh`
+- 采集服务：`calibration/rgb_intrinsics/scripts/capture_rgb_calibration.sh`
+- 计算服务：`calibration/rgb_intrinsics/scripts/finish_rgb_calibration.sh`
 
 ### 下一步
 
@@ -154,5 +154,5 @@ eye-to-hand 则相机固定在工位、标定板固定在末端，求解相机�
 重新启动 Codex 后，发送：
 
 ```text
-读取 /home/z/Apps-my/docs/ROS2_HUMBLE_PROGRESS.md，并继续其中的 ROS 2 Humble 配置任务。
+读取 docs/ROS2_HUMBLE_PROGRESS.md，并继续其中的 ROS 2 Humble 配置任务。
 ```

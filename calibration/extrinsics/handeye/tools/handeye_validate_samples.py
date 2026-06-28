@@ -9,6 +9,9 @@ import numpy as np
 import yaml
 
 
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+
+
 def as_matrix(value):
     matrix = np.array(value, dtype=np.float64)
     if matrix.shape != (4, 4):
@@ -32,9 +35,9 @@ def rot_angle_deg(r_a, r_b):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--samples', default='/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/samples.jsonl')
-    parser.add_argument('--result', default='/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/handeye_result.yaml')
-    parser.add_argument('--output', default='/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/base_target_validation.csv')
+    parser.add_argument('--samples', default=str(PROJECT_ROOT / 'calibration/extrinsics/handeye/sessions/handeye_samples/samples.jsonl'))
+    parser.add_argument('--result', default=str(PROJECT_ROOT / 'calibration/extrinsics/handeye/sessions/handeye_samples/handeye_result.yaml'))
+    parser.add_argument('--output', default=str(PROJECT_ROOT / 'calibration/extrinsics/handeye/sessions/handeye_samples/base_target_validation.csv'))
     args = parser.parse_args()
 
     samples = load_samples(args.samples)

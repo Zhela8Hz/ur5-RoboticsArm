@@ -1,12 +1,12 @@
 UR5 hand-eye calibration result
-Session: /home/z/Apps-my/calibration/extrinsics/handeye/sessions/20260626_004119
+Session: calibration/extrinsics/handeye/sessions/20260626_004119
 Date: 2026-06-26
 
 1. Robot driver calibration status
 
 UR driver was restarted with the real robot kinematics file:
 
-  /home/z/Apps-my/configs/robot/ur5_actual_calibration.yaml
+  configs/robot/ur5_actual_calibration.yaml
 
 The driver reported:
 
@@ -22,7 +22,7 @@ hand-eye validation error.
 
 Sample file:
 
-  /home/z/Apps-my/calibration/extrinsics/handeye/sessions/20260626_004119/samples.jsonl
+  calibration/extrinsics/handeye/sessions/20260626_004119/samples.jsonl
 
 Accepted samples: 25
 ChArUco corner statistics:
@@ -65,11 +65,11 @@ Homogeneous matrix T_tool_camera:
 
 Result file:
 
-  /home/z/Apps-my/calibration/extrinsics/handeye/sessions/20260626_004119/handeye_result.yaml
+  calibration/extrinsics/handeye/sessions/20260626_004119/handeye_result.yaml
 
 Validation CSV:
 
-  /home/z/Apps-my/calibration/extrinsics/handeye/sessions/20260626_004119/base_target_validation.csv
+  calibration/extrinsics/handeye/sessions/20260626_004119/base_target_validation.csv
 
 Solver residual from handeye_result.yaml:
 
@@ -95,7 +95,7 @@ These values are well inside the target limits:
 
 Live validation used:
 
-  /home/z/Apps-my/calibration/extrinsics/handeye/sessions/latest/handeye_result.yaml
+  calibration/extrinsics/handeye/sessions/latest/handeye_result.yaml
 
 Latest observed validation after 9 samples:
 
@@ -106,7 +106,7 @@ Latest observed validation after 9 samples:
 
 Raw live validation log copied to:
 
-  /home/z/Apps-my/calibration/extrinsics/handeye/sessions/20260626_004119/live_validation_raw_log.jsonl
+  calibration/extrinsics/handeye/sessions/20260626_004119/live_validation_raw_log.jsonl
 
 6. Interpretation
 
@@ -122,9 +122,9 @@ experiments.
 
 For future use, keep using:
 
-  /home/z/Apps-my/calibration/extrinsics/handeye/sessions/latest/handeye_result.yaml
+  calibration/extrinsics/handeye/sessions/latest/handeye_result.yaml
 
 Do not use old files under:
 
-  /home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/
+  calibration/extrinsics/handeye/sessions/handeye_samples/
 

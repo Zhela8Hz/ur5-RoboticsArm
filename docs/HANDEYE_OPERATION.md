@@ -5,7 +5,7 @@
 ## 0. 环境检查
 
 ```bash
-cd /home/z/Apps-my
+cd <your cloned repo>
 ./calibration/extrinsics/handeye/tools/handeye_check_env.sh
 ```
 
@@ -14,7 +14,7 @@ cd /home/z/Apps-my
 终端 1：
 
 ```bash
-cd /home/z/Apps-my
+cd <your cloned repo>
 ./scripts/camera/start_dabai_camera.sh
 ```
 
@@ -22,8 +22,8 @@ cd /home/z/Apps-my
 
 ```bash
 source /opt/ros/humble/setup.bash
-source /home/z/Apps-my/ros2_ws/install/setup.bash
-export ROS_LOG_DIR=/home/z/Apps-my/.ros-log
+source ./ros2_ws/install/setup.bash
+export ROS_LOG_DIR="$PWD/.ros-log"
 ros2 topic hz /camera/color/image_raw
 ```
 
@@ -34,7 +34,7 @@ ros2 topic hz /camera/color/image_raw
 终端 3：
 
 ```bash
-cd /home/z/Apps-my
+cd <your cloned repo>
 ./scripts/robot/start_ur5_driver.sh
 ```
 
@@ -43,7 +43,7 @@ cd /home/z/Apps-my
 终端 4 检查状态：
 
 ```bash
-cd /home/z/Apps-my
+cd <your cloned repo>
 ./scripts/robot/check_ur5_state.sh
 ```
 
@@ -54,7 +54,7 @@ cd /home/z/Apps-my
 终端 5：
 
 ```bash
-cd /home/z/Apps-my
+cd <your cloned repo>
 ./calibration/extrinsics/handeye/scripts/start_handeye_capture.sh
 ```
 
@@ -70,9 +70,9 @@ cd /home/z/Apps-my
 采集输出：
 
 ```text
-/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/samples.jsonl
-/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/sample_XXX_raw.png
-/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/sample_XXX_overlay.png
+calibration/extrinsics/handeye/sessions/handeye_samples/samples.jsonl
+calibration/extrinsics/handeye/sessions/handeye_samples/sample_XXX_raw.png
+calibration/extrinsics/handeye/sessions/handeye_samples/sample_XXX_overlay.png
 ```
 
 ## 4. 求解外参
@@ -80,14 +80,14 @@ cd /home/z/Apps-my
 采集完成后：
 
 ```bash
-cd /home/z/Apps-my
+cd <your cloned repo>
 ./calibration/extrinsics/handeye/scripts/solve_handeye.sh
 ```
 
 输出：
 
 ```text
-/home/z/Apps-my/calibration/extrinsics/handeye/sessions/handeye_samples/handeye_result.yaml
+calibration/extrinsics/handeye/sessions/handeye_samples/handeye_result.yaml
 ```
 
 核心结果是：

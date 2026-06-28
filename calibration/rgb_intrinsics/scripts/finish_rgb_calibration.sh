@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-source /home/z/ros2_ws/setup_charuco_calibration.bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null || true)"
+if [ -z "${PROJECT_ROOT}" ]; then
+  PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+fi
+
+source /opt/ros/humble/setup.bash
+source "${PROJECT_ROOT}/ros2_ws/install/setup.bash"
 ros2 service call /calibrate std_srvs/srv/Trigger '{}'
