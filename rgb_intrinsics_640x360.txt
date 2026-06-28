@@ -1,0 +1,37 @@
+DaBai DCW RGB Intrinsic Calibration
+===================================
+
+Image mode
+----------
+Width:  640 px
+Height: 360 px
+
+Calibration quality
+-------------------
+RMS reprojection error: 0.2232757215 px
+
+Camera matrix K
+---------------
+[349.3258005899, 0.0,            320.1061644245]
+[0.0,            348.7786041730, 174.3310864666]
+[0.0,            0.0,            1.0]
+
+Intrinsics
+----------
+fx: 349.3258005899
+fy: 348.7786041730
+cx: 320.1061644245
+cy: 174.3310864666
+
+Distortion model: plumb_bob
+Distortion coefficients (k1, k2, p1, p2, k3)
+------------------------------------------------
+0.0115030260
+-0.1259421663
+-0.0024063714
+-0.0003894957
+0.0787438837
+
+Source YAML: /home/z/Apps-my/rgb_intrinsics_640x360.yaml
+Calibration board: ChArUco 6x6, 25 mm squares, 18 mm markers,
+DICT_6X6_1000, start_id=233.
