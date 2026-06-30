@@ -2,6 +2,10 @@
 
 当前流程用于 eye-in-hand：相机固定在 UR5 末端，ChArUco 板固定在工位上。
 
+当前脚本已改为动态解析仓库根目录：优先使用 `git rev-parse --show-toplevel`，失败时再按脚本自身位置做相对路径回退。因此下面命令只要求先 `cd <your cloned repo>`，不再依赖 `/home/z/Apps-my` 这类硬编码绝对路径。
+
+注意：如果 RGB 相机、相机支架、末端夹具或任何影响 `tool0 -> camera_color_optical_frame` 刚性关系的部件被拆卸重装，旧手眼外参立即失效，必须重新采集、求解和验证。2026-06-26 的结果已经因拆装重装失效，只能作为历史数值参考。
+
 ## 0. 环境检查
 
 ```bash
@@ -55,8 +59,10 @@ cd <your cloned repo>
 
 ```bash
 cd <your cloned repo>
-./calibration/extrinsics/handeye/scripts/start_handeye_capture.sh
+./calibration/extrinsics/handeye/scripts/start_handeye_retake_capture.sh
 ```
+
+`start_handeye_retake_capture.sh` 会新建时间戳 session，并把 `calibration/extrinsics/handeye/sessions/latest` 指向本次新 session。重做标定时优先使用这个脚本，避免新旧样本混在 `handeye_samples` 目录里。
 
 每次移动机械臂到一个新姿态后：
 
@@ -70,9 +76,9 @@ cd <your cloned repo>
 采集输出：
 
 ```text
-calibration/extrinsics/handeye/sessions/handeye_samples/samples.jsonl
-calibration/extrinsics/handeye/sessions/handeye_samples/sample_XXX_raw.png
-calibration/extrinsics/handeye/sessions/handeye_samples/sample_XXX_overlay.png
+calibration/extrinsics/handeye/sessions/<YYYYMMDD_HHMMSS>/samples.jsonl
+calibration/extrinsics/handeye/sessions/<YYYYMMDD_HHMMSS>/sample_XXX_raw.png
+calibration/extrinsics/handeye/sessions/<YYYYMMDD_HHMMSS>/sample_XXX_overlay.png
 ```
 
 ## 4. 求解外参
@@ -81,13 +87,14 @@ calibration/extrinsics/handeye/sessions/handeye_samples/sample_XXX_overlay.png
 
 ```bash
 cd <your cloned repo>
-./calibration/extrinsics/handeye/scripts/solve_handeye.sh
+./calibration/extrinsics/handeye/scripts/solve_latest_handeye_retake.sh
 ```
 
 输出：
 
 ```text
-calibration/extrinsics/handeye/sessions/handeye_samples/handeye_result.yaml
+calibration/extrinsics/handeye/sessions/latest/handeye_result.yaml
+calibration/extrinsics/handeye/sessions/latest/base_target_validation.csv
 ```
 
 核心结果是：
@@ -100,7 +107,7 @@ T_tool_camera
 
 ## 5. 质量判断
 
-`solve_handeye.sh` 会打印固定标定板一致性：
+`solve_latest_handeye_retake.sh` 会打印固定标定板一致性：
 
 ```text
 translation_m_mean
@@ -115,13 +122,28 @@ rotation_deg_max
 - `translation_m_mean > 0.02` 通常说明样本姿态、图像检测、TF frame 或相机固定有问题。
 - `rotation_deg_mean` 越小越好；若超过数度，应重新检查样本。
 
-## 6. 常见问题
+## 6. 在线验证
+
+求解通过后，保持相机、UR5 driver 和固定 ChArUco 板不变，运行：
+
+```bash
+cd <your cloned repo>
+./calibration/extrinsics/handeye/scripts/start_handeye_live_validate.sh
+```
+
+移动机械臂到几个不同姿态，观察固定板在 `base` 坐标系下的散布。建议目标：
+
+- `scatter_mean < 5 mm`
+- `scatter_max < 10 mm`
+- `rot_mean < 1-2 deg`
+
+## 7. 常见问题
 
 如果采集显示 `ChArUco pose failed`：
 
 - 标定板太远、太斜、反光或不完整。
 - 图像模糊，机械臂未停稳。
-- 标定板参数不一致。当前脚本参数是 `6x6`、`25 mm` square、`18 mm` marker、`DICT_6X6_1000`、`start_id=233`。
+- 标定板参数不一致。当前小板脚本参数是 `6x6`、`25 mm` square、`18 mm` marker、`DICT_6X6_1000`、`start_id=233`。
 
 如果采集显示 `TF lookup failed`：
 

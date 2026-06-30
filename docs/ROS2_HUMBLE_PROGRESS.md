@@ -30,7 +30,7 @@
 
 ### RGB 内参标定（完成）
 
-- 标定板：ChArUco，`6×6 squares`，方格 `25 mm`，marker `18 mm`，`DICT_6X6_1000`，`start_id=233`。
+- 当时使用的标定板：ChArUco，`6×6 squares`，方格 `25 mm`，marker `18 mm`，`DICT_6X6_1000`，`start_id=233`。
 - 图像模式：RGB `640×360 @ 10 fps`。
 - 有效采集：25 张。
 - RMS 重投影误差：`0.2232757 px`，结果可用。
@@ -45,13 +45,12 @@
 - 已将 IR 启动脚本设为 `enable_ldp:=false` 以降低深度投影器散斑；若需完成高质量 IR 内参，建议使用更大物理尺寸的同布局 ChArUco 板或外部均匀 IR 补光。
 - IR/深度内参不阻塞以 RGB 图像为基础的手眼标定；后续若需 RGB-D 对齐、点云抓取或深度测量，再完成 IR 内参、RGB-IR 外参与深度尺度验证。
 
-### 新 IR 标定板建议（0.5 m 及以上距离）
+### ChArUco 标定板参数
 
-- 当前 `150 mm` 标定板在 `0.5 m` 处预计仅投影约 `108 px` 宽，`18 mm` marker 约 `13 px`，不利于受散斑影响的 IR 检测。
-- 决定使用更大板：`6×6 squares`，方格 `50 mm`，marker `36 mm`，棋盘实际尺寸 `300×300 mm`，`DICT_6X6_1000`，`start_id=233`。
-- 成品四周保留 `15–20 mm` 白边，整体约 `330–340 mm` 见方，贴在平整硬质背板上。
-- 按旧 IR 焦距粗估，该板在 `0.5 m` 处投影约 `217 px` 宽，单个 marker 约 `26 px`；在 `0.7 m` 处约 `19 px`。相比旧板可显著提高检测稳定性。
-- 使用新板进行 IR 内参标定时，将参数改为 `square_length_m=0.050`、`marker_length_m=0.036`；RGB 已完成的 `640×360` 内参不需要重做，手眼标定也可使用这张新板。
+- 当前 RGB 手眼流程实际使用小板：`6×6 squares`，方格 `25 mm`，marker `18 mm`，`DICT_6X6_1000`，`start_id=233`。
+- 曾经记录过大板：`6×6 squares`，方格 `40 mm`，marker `30 mm`，棋盘图案尺寸 `240×240 mm`，外边框成品 `300×300 mm`。只有实际使用这块大板时，脚本参数才应切到 `square_length_m=0.040`、`marker_length_m=0.030`。
+- 外边框不参与 OpenCV ChArUco 几何模型；算法参数只需要棋盘方格尺寸和 marker 尺寸。
+- RGB 已完成的 `640×360` 内参来自小板 `25 mm / 18 mm` 参数。板子尺寸用错会导致旋转看起来正常但平移误差达到厘米级。
 
 ### 当前可用脚本
 
@@ -134,7 +133,7 @@ ros2 run charuco_camera_calibration charuco_intrinsics
 
 ## 标定操作说明（已完成 RGB；IR 可选）
 
-RGB 标定使用工作区中的 `start_dabai_camera.sh`、`start_rgb_calibration.sh`、`capture_rgb_calibration.sh` 和 `finish_rgb_calibration.sh`。IR 标定使用相应的 `start_dabai_ir_camera.sh` 与 `start_ir_calibration.sh`。实体 ChArUco 板参数必须与脚本参数一致：`6×6`、方格 `25 mm`、marker `18 mm`、`DICT_6X6_1000`、`start_id=233`。
+RGB 标定使用工作区中的 `start_dabai_camera.sh`、`start_rgb_calibration.sh`、`capture_rgb_calibration.sh` 和 `finish_rgb_calibration.sh`。IR 标定使用相应的 `start_dabai_ir_camera.sh` 与 `start_ir_calibration.sh`。当前实体 ChArUco 板参数必须与脚本参数一致；当前 RGB 手眼流程使用小板：`6×6`、方格 `25 mm`、marker `18 mm`、`DICT_6X6_1000`、`start_id=233`。
 
 ## 后续手眼标定（暂不配置）
 

@@ -1,6 +1,5 @@
-ros2_ws/build/
-ros2_ws/install/
-ros2_ws/log/
+AGENTS.md
+ros2_ws/
 Log/
 .ros-log/
 __pycache__/
@@ -9,7 +8,9 @@ handeye_sessions/*/*.png
 *.bag
 *.db3
 handeye_sessions/latest
-calibration/extrinsics/handeye/sessions/*/*.png
+calibration/depth_intrinsics/captures/*.png
+calibration/depth_intrinsics/probes/*.png
+calibration/extrinsics/handeye/sessions/**/*.png
 calibration/extrinsics/handeye/sessions/*/live_validation_raw_log.jsonl
 calibration/extrinsics/handeye/sessions/latest
 calibration/extrinsics/handeye/sessions/handeye_sessions/

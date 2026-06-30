@@ -12,7 +12,31 @@ export ROS_LOG_DIR="${PROJECT_ROOT}/.ros-log"
 mkdir -p "${ROS_LOG_DIR}"
 
 echo "Checking /joint_states once..."
-timeout 5s ros2 topic echo /joint_states --once || {
+python3 - <<'PY' || {
+import sys
+
+import rclpy
+from sensor_msgs.msg import JointState
+
+rclpy.init()
+node = rclpy.create_node('check_ur5_joint_states_once')
+received = []
+
+def callback(msg):
+    if msg.name and msg.position:
+        print('JointState names:', ', '.join(msg.name))
+        print('JointState positions:', ', '.join(f'{v:.6f}' for v in msg.position))
+        received.append(True)
+
+node.create_subscription(JointState, '/joint_states', callback, 10)
+end_time = node.get_clock().now().nanoseconds + 5_000_000_000
+while rclpy.ok() and not received and node.get_clock().now().nanoseconds < end_time:
+    rclpy.spin_once(node, timeout_sec=0.2)
+
+node.destroy_node()
+rclpy.shutdown()
+sys.exit(0 if received else 1)
+PY
   echo
   echo "ERROR: /joint_states has no data yet."
   echo "Check UR driver terminal, robot power/brake, and teach pendant External Control Play state."
