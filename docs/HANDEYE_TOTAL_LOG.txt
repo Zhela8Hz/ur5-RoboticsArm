@@ -1,0 +1,533 @@
+UR5 RGB hand-eye calibration total log
+UR5 RGB 手眼标定总日志
+
+Log update rule
+---------------
+
+中文：以后每次更新本日志时，必须同时写中文和 English 两个版本。中文版本中必须保留关键的不可替换英文原文名词，包括但不限于 `UR5`、`RGB`、`eye-in-hand`、`ChArUco`、`T_tool_camera`、`tool0`、`camera_color_optical_frame`、`base`、`PROJECT_ROOT`、`SCRIPT_DIR`、`handeye_result.yaml`、`samples.jsonl`、`translation_m_mean`、`rotation_deg_mean`、文件路径、命令、ROS topic、ROS frame、API/字段名和终端原始报错。
+
+English: Every future update to this log must be written in both Chinese and English. The Chinese version must keep key non-translatable English terms verbatim, including but not limited to `UR5`, `RGB`, `eye-in-hand`, `ChArUco`, `T_tool_camera`, `tool0`, `camera_color_optical_frame`, `base`, `PROJECT_ROOT`, `SCRIPT_DIR`, `handeye_result.yaml`, `samples.jsonl`, `translation_m_mean`, `rotation_deg_mean`, file paths, commands, ROS topics, ROS frames, API/field names, and original terminal error text.
+
+
+Current status
+--------------
+
+中文：
+
+当前有效的 `RGB eye-in-hand` 外参结果是：
+
+  calibration/extrinsics/handeye/sessions/20260630_195009/handeye_result.yaml
+
+当前 `latest` session 指向：
+
+  calibration/extrinsics/handeye/sessions/20260630_195009
+
+当前离线状态：
+
+  PASS_OFFLINE
+
+在线验证状态：
+
+  Pending。正式用于机器人操作前，应运行：
+
+  calibration/extrinsics/handeye/scripts/start_handeye_live_validate.sh
+
+English:
+
+The current active `RGB eye-in-hand` extrinsic result is:
+
+  calibration/extrinsics/handeye/sessions/20260630_195009/handeye_result.yaml
+
+The current `latest` session resolves to:
+
+  calibration/extrinsics/handeye/sessions/20260630_195009
+
+Current offline status:
+
+  PASS_OFFLINE
+
+Live validation status:
+
+  Pending. Before using the result for robot operation, run:
+
+  calibration/extrinsics/handeye/scripts/start_handeye_live_validate.sh
+
+
+Current board and camera setup
+------------------------------
+
+中文：
+
+当前实际使用的是小 `ChArUco` 板：
+
+  squares: 6x6
+  square_length_m: 0.025
+  marker_length_m: 0.018
+  dictionary: DICT_6X6_1000
+  start_id: 233
+
+当前 `RGB` 图像模式：
+
+  640x360 @ 10 fps
+
+曾经记录过大板参数：
+
+  square_length_m: 0.040
+  marker_length_m: 0.030
+
+只有实际换回大板时，脚本参数才应切到 `0.040 / 0.030`。板子尺寸用错会导致 `rotation` 看起来正常，但 `translation` 出现厘米级误差。
+
+English:
+
+The physical board currently in use is the small `ChArUco` board:
+
+  squares: 6x6
+  square_length_m: 0.025
+  marker_length_m: 0.018
+  dictionary: DICT_6X6_1000
+  start_id: 233
+
+Current `RGB` image mode:
+
+  640x360 @ 10 fps
+
+A larger board was recorded previously:
+
+  square_length_m: 0.040
+  marker_length_m: 0.030
+
+Use `0.040 / 0.030` only when that larger board is physically used. A wrong board size can make `rotation` look good while `translation` fails at centimeter scale.
+
+
+Current active result
+---------------------
+
+中文：
+
+Session：
+
+  calibration/extrinsics/handeye/sessions/20260630_195009
+
+单独结果报告：
+
+  calibration/extrinsics/handeye/sessions/20260630_195009/handeye_calibration_result_small_board.txt
+
+Result YAML：
+
+  calibration/extrinsics/handeye/sessions/20260630_195009/handeye_result.yaml
+
+Validation CSV：
+
+  calibration/extrinsics/handeye/sessions/20260630_195009/base_target_validation.csv
+
+标定类型：
+
+  eye-in-hand
+
+Method：
+
+  Tsai
+
+Transform：
+
+  T_tool_camera
+  parent_frame = tool0
+  child_frame  = camera_color_optical_frame
+
+`tool0` frame 下的 translation：
+
+  x = -0.0984539028 m = -98.45 mm
+  y =  0.0039007693 m =   3.90 mm
+  z =  0.0854959288 m =  85.50 mm
+
+Homogeneous matrix `T_tool_camera`：
+
+  -0.001510532   0.999998761   0.000442227  -0.098453903
+  -0.999973995  -0.001513613   0.007051086   0.003900769
+   0.007051746  -0.000431565   0.999975043   0.085495929
+   0.000000000   0.000000000   0.000000000   1.000000000
+
+Offline fixed-board consistency：
+
+  translation_m_mean = 0.001361724 m = 1.36 mm
+  translation_m_max  = 0.003044513 m = 3.04 mm
+  rotation_deg_mean  = 0.288144 deg
+  rotation_deg_max   = 0.689497 deg
+
+CSV scatter around mean fixed board pose：
+
+  translation mean = 1.04 mm
+  translation max  = 3.04 mm
+  rotation mean    = 0.276619 deg
+  rotation max     = 0.689497 deg
+
+English:
+
+Session:
+
+  calibration/extrinsics/handeye/sessions/20260630_195009
+
+Standalone result report:
+
+  calibration/extrinsics/handeye/sessions/20260630_195009/handeye_calibration_result_small_board.txt
+
+Result YAML:
+
+  calibration/extrinsics/handeye/sessions/20260630_195009/handeye_result.yaml
+
+Validation CSV:
+
+  calibration/extrinsics/handeye/sessions/20260630_195009/base_target_validation.csv
+
+Calibration type:
+
+  eye-in-hand
+
+Method:
+
+  Tsai
+
+Transform:
+
+  T_tool_camera
+  parent_frame = tool0
+  child_frame  = camera_color_optical_frame
+
+Translation in the `tool0` frame:
+
+  x = -0.0984539028 m = -98.45 mm
+  y =  0.0039007693 m =   3.90 mm
+  z =  0.0854959288 m =  85.50 mm
+
+Homogeneous matrix `T_tool_camera`:
+
+  -0.001510532   0.999998761   0.000442227  -0.098453903
+  -0.999973995  -0.001513613   0.007051086   0.003900769
+   0.007051746  -0.000431565   0.999975043   0.085495929
+   0.000000000   0.000000000   0.000000000   1.000000000
+
+Offline fixed-board consistency:
+
+  translation_m_mean = 0.001361724 m = 1.36 mm
+  translation_m_max  = 0.003044513 m = 3.04 mm
+  rotation_deg_mean  = 0.288144 deg
+  rotation_deg_max   = 0.689497 deg
+
+CSV scatter around the mean fixed-board pose:
+
+  translation mean = 1.04 mm
+  translation max  = 3.04 mm
+  rotation mean    = 0.276619 deg
+  rotation max     = 0.689497 deg
+
+
+2026-06-30 work progress
+------------------------
+
+中文：
+
+1. 复查 `2026-06-26` 旧 `RGB hand-eye calibration` 日志。结论：旧结果只适用于旧相机安装状态；由于 `RGB camera/end-effector mount` 后来拆装重装，旧 `T_tool_camera` 对当前硬件失效。
+
+2. 确认当前脚本使用动态路径：通过 `git rev-parse --show-toplevel` 解析 `PROJECT_ROOT`，失败时从 `SCRIPT_DIR` 做相对路径回退。
+
+3. 今天第一次采集 session 为：
+
+   calibration/extrinsics/handeye/sessions/20260630_190249
+
+   最初用大板参数 `square_length_m=0.040`、`marker_length_m=0.030` 求解，表现为 `rotation` 一致性好但 `translation` 有厘米级误差。
+
+4. 确认 `RGB` 分辨率保持 `640x360`。临时 `640x480` 改动已撤回，当前相机启动参数为：
+
+   color_width:=640 color_height:=360 color_fps:=10
+
+5. 今天第二次采集 session 为：
+
+   calibration/extrinsics/handeye/sessions/20260630_195009
+
+   它最初也被大板参数误算，导致厘米级 `translation` error。
+
+6. 确认实际物理板为小 `ChArUco` 板：`25 mm squares`、`18 mm markers`。随后将 active `hand-eye` 和 `RGB ChArUco` 工具参数切回：
+
+   square_length_m=0.025
+   marker_length_m=0.018
+
+7. 使用正确小板参数离线重算第二次采集，结果为 `PASS_OFFLINE`。当前 active result 为：
+
+   calibration/extrinsics/handeye/sessions/20260630_195009/handeye_result.yaml
+
+8. 使用同一小板参数离线重算第一次采集，用于对比：
+
+   calibration/extrinsics/handeye/sessions/20260630_190249/handeye_result_small_board.yaml
+
+9. 对比后决定使用第二次采集 `20260630_195009`，因为它的 `translation` 一致性和 fixed-board scatter 更小。
+
+English:
+
+1. Reviewed the old `2026-06-26` `RGB hand-eye calibration` log. Conclusion: the old result was valid only for the previous camera mounting. Since the `RGB camera/end-effector mount` was later disassembled and reinstalled, the old `T_tool_camera` is invalid for the current hardware.
+
+2. Verified that current scripts use dynamic paths: `PROJECT_ROOT` is resolved via `git rev-parse --show-toplevel`, with a fallback relative to `SCRIPT_DIR`.
+
+3. The first capture session today was:
+
+   calibration/extrinsics/handeye/sessions/20260630_190249
+
+   It was initially solved with the large-board parameters `square_length_m=0.040` and `marker_length_m=0.030`, producing good `rotation` consistency but centimeter-scale `translation` error.
+
+4. Confirmed that `RGB` resolution remains `640x360`. Temporary `640x480` changes were reverted. Current camera launch parameters are:
+
+   color_width:=640 color_height:=360 color_fps:=10
+
+5. The second capture session today was:
+
+   calibration/extrinsics/handeye/sessions/20260630_195009
+
+   It was also initially solved with the large-board parameters, causing centimeter-scale `translation` error.
+
+6. Confirmed that the physical board is the small `ChArUco` board: `25 mm squares` and `18 mm markers`. The active `hand-eye` and `RGB ChArUco` tooling was switched back to:
+
+   square_length_m=0.025
+   marker_length_m=0.018
+
+7. Recomputed the second capture offline with the correct small-board parameters. The result is `PASS_OFFLINE`. Current active result:
+
+   calibration/extrinsics/handeye/sessions/20260630_195009/handeye_result.yaml
+
+8. Recomputed the first capture offline with the same small-board parameters for comparison:
+
+   calibration/extrinsics/handeye/sessions/20260630_190249/handeye_result_small_board.yaml
+
+9. Decision: use the second capture `20260630_195009`, because its `translation` consistency and fixed-board scatter are smaller.
+
+
+Comparison of 2026-06-30 captures
+---------------------------------
+
+中文：
+
+第一次采集 `20260630_190249`，用小板参数重算：
+
+  samples = 27
+  translation_m_mean = 0.003728 m = 3.73 mm
+  translation_m_max  = 0.005513 m = 5.51 mm
+  rotation_deg_mean  = 0.238463 deg
+  rotation_deg_max   = 0.476281 deg
+  scatter_mean       = 1.37 mm
+  scatter_max        = 3.53 mm
+
+第二次采集 `20260630_195009`，用小板参数重算：
+
+  samples = 25
+  translation_m_mean = 0.001362 m = 1.36 mm
+  translation_m_max  = 0.003045 m = 3.04 mm
+  rotation_deg_mean  = 0.288144 deg
+  rotation_deg_max   = 0.689497 deg
+  scatter_mean       = 1.04 mm
+  scatter_max        = 3.04 mm
+
+决策：使用第二次采集 `20260630_195009`。
+
+English:
+
+First capture `20260630_190249`, recomputed with small-board parameters:
+
+  samples = 27
+  translation_m_mean = 0.003728 m = 3.73 mm
+  translation_m_max  = 0.005513 m = 5.51 mm
+  rotation_deg_mean  = 0.238463 deg
+  rotation_deg_max   = 0.476281 deg
+  scatter_mean       = 1.37 mm
+  scatter_max        = 3.53 mm
+
+Second capture `20260630_195009`, recomputed with small-board parameters:
+
+  samples = 25
+  translation_m_mean = 0.001362 m = 1.36 mm
+  translation_m_max  = 0.003045 m = 3.04 mm
+  rotation_deg_mean  = 0.288144 deg
+  rotation_deg_max   = 0.689497 deg
+  scatter_mean       = 1.04 mm
+  scatter_max        = 3.04 mm
+
+Decision: use the second capture `20260630_195009`.
+
+
+Script and input file policy
+----------------------------
+
+中文：
+
+脚本通过以下模式动态解析仓库根目录：
+
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  PROJECT_ROOT="$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null || true)"
+
+如果无法解析 git root，脚本会从自身位置按相对路径回退。
+
+关键脚本：
+
+  scripts/camera/start_dabai_camera.sh
+  scripts/robot/start_ur5_driver.sh
+  scripts/robot/check_ur5_state.sh
+  calibration/extrinsics/handeye/tools/handeye_check_env.sh
+  calibration/extrinsics/handeye/scripts/start_handeye_retake_capture.sh
+  calibration/extrinsics/handeye/scripts/solve_latest_handeye_retake.sh
+  calibration/extrinsics/handeye/scripts/start_handeye_live_validate.sh
+
+关键输入文件：
+
+  configs/robot/ur5_actual_calibration.yaml
+  calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml
+
+English:
+
+Scripts dynamically resolve the repository root using:
+
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  PROJECT_ROOT="$(git -C "${SCRIPT_DIR}" rev-parse --show-toplevel 2>/dev/null || true)"
+
+If the git root cannot be resolved, scripts fall back to a relative path from their own location.
+
+Important scripts:
+
+  scripts/camera/start_dabai_camera.sh
+  scripts/robot/start_ur5_driver.sh
+  scripts/robot/check_ur5_state.sh
+  calibration/extrinsics/handeye/tools/handeye_check_env.sh
+  calibration/extrinsics/handeye/scripts/start_handeye_retake_capture.sh
+  calibration/extrinsics/handeye/scripts/solve_latest_handeye_retake.sh
+  calibration/extrinsics/handeye/scripts/start_handeye_live_validate.sh
+
+Important input files:
+
+  configs/robot/ur5_actual_calibration.yaml
+  calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml
+
+
+Archived invalid 2026-06-26 result
+----------------------------------
+
+中文：
+
+`2026-06-26` 结果在 `RGB camera/end-effector` 拆装重装后失效。它只作为历史数值参考保留，不能用于当前操作。
+
+归档结果：
+
+  calibration/extrinsics/handeye/sessions/20260626_004119/handeye_result.yaml
+
+旧 `T_tool_camera` translation：
+
+  x =  0.0652314244 m =  65.23 mm
+  y = -0.0071898034 m =  -7.19 mm
+  z =  0.0094051179 m =   9.41 mm
+
+旧 homogeneous matrix `T_tool_camera`：
+
+  -0.003008205  -0.999669798   0.025519506   0.065231424
+   0.999991855  -0.002938546   0.002766705  -0.007189803
+  -0.002690801   0.025527621   0.999670496   0.009405118
+   0.000000000   0.000000000   0.000000000   1.000000000
+
+English:
+
+The `2026-06-26` result became invalid after the `RGB camera/end-effector` was disassembled and reinstalled. It is kept only as a historical numeric reference and must not be used for current operation.
+
+Archived result:
+
+  calibration/extrinsics/handeye/sessions/20260626_004119/handeye_result.yaml
+
+Old `T_tool_camera` translation:
+
+  x =  0.0652314244 m =  65.23 mm
+  y = -0.0071898034 m =  -7.19 mm
+  z =  0.0094051179 m =   9.41 mm
+
+Old homogeneous matrix `T_tool_camera`:
+
+  -0.003008205  -0.999669798   0.025519506   0.065231424
+   0.999991855  -0.002938546   0.002766705  -0.007189803
+  -0.002690801   0.025527621   0.999670496   0.009405118
+   0.000000000   0.000000000   0.000000000   1.000000000
+
+
+Preserved troubleshooting notes
+-------------------------------
+
+中文：
+
+`UR driver` 必须使用真实机器人运动学文件：
+
+  configs/robot/ur5_actual_calibration.yaml
+
+曾经出现的运动学不匹配报错原文：
+
+  The calibration parameters of the connected robot don't match the ones from the given kinematics config file.
+
+含义：`ROS driver` 使用的运动学与真实 `UR5` 不一致，会导致 `base -> tool0` 不准确，并放大 `hand-eye` 验证误差。
+
+期望成功信息原文包括：
+
+  Calibration checksum: calib_17294063568689657538
+  Calibration checked successfully.
+  System successfully started.
+  Robot mode: RUNNING
+  Safety mode: NORMAL
+
+曾经出现的非致命消息原文：
+
+  A message was lost!!!
+
+含义：短暂运行 `ros2 topic echo` 时可能出现；如果 `/joint_states` 和 `base -> tool0` TF 正常，则不是失败。
+
+曾经出现的真实失败原文：
+
+  WARNING: topic [/joint_states] does not appear to be published yet
+  Could not determine the type for the passed topic
+  ERROR: /joint_states has no data yet.
+
+含义：`UR driver` core node 未运行或已退出，导致 `/joint_states` 未发布。
+
+曾经出现的 `UR driver` fatal error 原文：
+
+  Could not get configuration package within timeout, are you connected to the robot?(Configured timeout: 1 sec)
+
+含义：driver 部分连接到机器人，但没有及时收到 robot configuration package。重启 `UR driver`，并确认 teach pendant 上的 `External Control` 程序处于 Play 状态。
+
+English:
+
+The `UR driver` must use the real robot kinematics file:
+
+  configs/robot/ur5_actual_calibration.yaml
+
+Previously observed kinematics mismatch text:
+
+  The calibration parameters of the connected robot don't match the ones from the given kinematics config file.
+
+Meaning: the `ROS driver` was using kinematics that did not match the physical `UR5`, which can make `base -> tool0` inaccurate and increase `hand-eye` validation error.
+
+Expected successful messages include:
+
+  Calibration checksum: calib_17294063568689657538
+  Calibration checked successfully.
+  System successfully started.
+  Robot mode: RUNNING
+  Safety mode: NORMAL
+
+Previously observed non-fatal message:
+
+  A message was lost!!!
+
+Meaning: this can appear when `ros2 topic echo` subscribes briefly. It is not a failure if `/joint_states` and `base -> tool0` TF are valid.
+
+Previously observed real failure:
+
+  WARNING: topic [/joint_states] does not appear to be published yet
+  Could not determine the type for the passed topic
+  ERROR: /joint_states has no data yet.
+
+Meaning: the `UR driver` core node was not running or had exited, so `/joint_states` was not being published.
+
+Previously observed `UR driver` fatal error:
+
+  Could not get configuration package within timeout, are you connected to the robot?(Configured timeout: 1 sec)
+
+Meaning: the driver partially connected to the robot but did not receive the robot configuration package quickly enough. Restart `UR driver` and confirm that the `External Control` program is playing on the teach pendant.

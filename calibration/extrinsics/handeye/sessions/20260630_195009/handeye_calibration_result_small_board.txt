@@ -1,0 +1,80 @@
+UR5 RGB hand-eye calibration result
+Session: calibration/extrinsics/handeye/sessions/20260630_195009
+Date: 2026-06-30
+Status: PASS_OFFLINE
+
+This is the second 2026-06-30 RGB eye-in-hand capture, recomputed with the
+small ChArUco board parameters:
+
+  squares: 6x6
+  square_length_m: 0.025
+  marker_length_m: 0.018
+  dictionary: DICT_6X6_1000
+  start_id: 233
+
+The earlier failed solve used the large-board parameters, 0.040 m square and
+0.030 m marker, which made translation consistency fail.
+
+Calibration type: eye-in-hand
+Method: Tsai
+Transform: T_tool_camera
+Parent frame: tool0
+Child frame: camera_color_optical_frame
+
+Translation xyz in tool0 frame, meters:
+
+  x = -0.0984539028
+  y =  0.0039007693
+  z =  0.0854959288
+
+Translation xyz in millimeters:
+
+  x = -98.45 mm
+  y =   3.90 mm
+  z =  85.50 mm
+
+Homogeneous matrix T_tool_camera:
+
+  -0.001510532   0.999998761   0.000442227  -0.098453903
+  -0.999973995  -0.001513613   0.007051086   0.003900769
+   0.007051746  -0.000431565   0.999975043   0.085495929
+   0.000000000   0.000000000   0.000000000   1.000000000
+
+Fixed-board consistency from handeye_result.yaml:
+
+  translation_m_mean = 0.001361724 m = 1.36 mm
+  translation_m_max  = 0.003044513 m = 3.04 mm
+  rotation_deg_mean  = 0.288144 deg
+  rotation_deg_max   = 0.689497 deg
+
+CSV scatter around mean fixed board pose:
+
+  translation mean = 0.001041 m = 1.04 mm
+  translation max  = 0.003043 m = 3.04 mm
+  rotation mean    = 0.276619 deg
+  rotation max     = 0.689497 deg
+
+Samples:
+
+  accepted samples: 25
+  ChArUco corners min: 21
+  ChArUco corners max: 25
+
+Worst samples by translation scatter:
+
+  sample_024: trans=0.003043 m, rot=0.121066 deg, corners=24
+  sample_023: trans=0.001822 m, rot=0.385934 deg, corners=23
+  sample_011: trans=0.001734 m, rot=0.267701 deg, corners=25
+  sample_015: trans=0.001629 m, rot=0.390001 deg, corners=21
+  sample_014: trans=0.001332 m, rot=0.405401 deg, corners=23
+
+Files:
+
+  result_yaml=calibration/extrinsics/handeye/sessions/20260630_195009/handeye_result.yaml
+  validation_csv=calibration/extrinsics/handeye/sessions/20260630_195009/base_target_validation.csv
+  samples=calibration/extrinsics/handeye/sessions/20260630_195009/samples.jsonl
+  wrong_large_board_backup=calibration/extrinsics/handeye/sessions/20260630_195009/samples_wrong_40x30.jsonl
+
+Recommendation:
+
+  Use this result after live validation passes.

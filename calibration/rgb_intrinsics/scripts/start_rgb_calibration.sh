@@ -9,6 +9,12 @@ fi
 
 source /opt/ros/humble/setup.bash
 source "${PROJECT_ROOT}/ros2_ws/install/setup.bash"
+if [ -d "${PROJECT_ROOT}/ros2_ws/install_charuco/charuco_camera_calibration" ]; then
+  CHARUCO_PREFIX="${PROJECT_ROOT}/ros2_ws/install_charuco/charuco_camera_calibration"
+  export AMENT_PREFIX_PATH="${CHARUCO_PREFIX}:${AMENT_PREFIX_PATH:-}"
+  export PATH="${CHARUCO_PREFIX}/lib/charuco_camera_calibration:${PATH}"
+  export PYTHONPATH="${CHARUCO_PREFIX}/lib/python3.10/site-packages:${PYTHONPATH:-}"
+fi
 exec ros2 run charuco_camera_calibration charuco_intrinsics --ros-args \
   -p image_topic:=/camera/color/image_raw \
   -p squares_x:=6 -p squares_y:=6 \
