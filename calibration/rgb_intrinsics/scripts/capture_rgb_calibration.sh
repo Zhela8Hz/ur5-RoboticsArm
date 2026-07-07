@@ -8,5 +8,4 @@ if [ -z "${PROJECT_ROOT}" ]; then
 fi
 
 source /opt/ros/humble/setup.bash
-source "${PROJECT_ROOT}/ros2_ws/install/setup.bash"
 ros2 service call /capture std_srvs/srv/Trigger '{}'

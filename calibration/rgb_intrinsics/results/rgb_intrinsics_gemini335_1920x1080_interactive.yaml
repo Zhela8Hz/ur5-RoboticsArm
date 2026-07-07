@@ -1,0 +1,58 @@
+image_width: 1920
+image_height: 1080
+camera_name: gemini335_color
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data:
+  - -0.00330232368767015
+  - -0.05949271897561019
+  - 0.0005982661910523087
+  - -0.0006940373219254788
+  - 0.029519148583516105
+camera_matrix:
+  rows: 3
+  cols: 3
+  data:
+  - 1036.9607298723668
+  - 0.0
+  - 952.9693012093821
+  - 0.0
+  - 1035.3753826265481
+  - 538.0055675021727
+  - 0.0
+  - 0.0
+  - 1.0
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data:
+  - 1.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+projection_matrix:
+  rows: 3
+  cols: 4
+  data:
+  - 1036.9607298723668
+  - 0.0
+  - 952.9693012093821
+  - 0.0
+  - 0.0
+  - 1035.3753826265481
+  - 538.0055675021727
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+  - 0.0
+reprojection_error_px: 0.3566042810732432
+accepted_samples: 21
+min_charuco_corners_strictly_greater_than: 20

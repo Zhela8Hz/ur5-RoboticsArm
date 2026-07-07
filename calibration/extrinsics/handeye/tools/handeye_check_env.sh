@@ -8,7 +8,6 @@ if [ -z "${PROJECT_ROOT}" ]; then
 fi
 
 source /opt/ros/humble/setup.bash
-source "${PROJECT_ROOT}/ros2_ws/install/setup.bash"
 export ROS_LOG_DIR="${PROJECT_ROOT}/.ros-log"
 mkdir -p "${ROS_LOG_DIR}"
 
@@ -30,6 +29,7 @@ print('OpenCV hand-eye support: OK')
 PY
 
 echo "Checking key files..."
-test -f "${PROJECT_ROOT}/calibration/rgb_intrinsics/results/rgb_intrinsics_640x360.yaml"
 test -x "${PROJECT_ROOT}/scripts/camera/start_dabai_camera.sh"
+test "$(ros2 pkg prefix orbbec_camera)" = "/opt/ros/humble"
+test -f "/opt/ros/humble/share/orbbec_camera/launch/gemini_330_series.launch.py"
 echo "Environment looks ready."

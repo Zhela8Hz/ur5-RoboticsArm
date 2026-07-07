@@ -9,6 +9,26 @@ fi
 
 cd "${PROJECT_ROOT}"
 source /opt/ros/humble/setup.bash
-source "${PROJECT_ROOT}/ros2_ws/install/setup.bash"
-exec ros2 launch orbbec_camera dabai_dcw.launch.py \
-  color_width:=640 color_height:=360 color_fps:=10
+export ROS_LOG_DIR="${PROJECT_ROOT}/.ros-log"
+mkdir -p "${ROS_LOG_DIR}"
+
+COLOR_WIDTH="${COLOR_WIDTH:-1920}"
+COLOR_HEIGHT="${COLOR_HEIGHT:-1080}"
+COLOR_FPS="${COLOR_FPS:-30}"
+COLOR_FORMAT="${COLOR_FORMAT:-MJPG}"
+
+exec ros2 run orbbec_camera orbbec_camera_node --ros-args \
+  -r __ns:=/camera \
+  -p camera_name:=camera \
+  -p enable_color:=true \
+  -p color_width:="${COLOR_WIDTH}" \
+  -p color_height:="${COLOR_HEIGHT}" \
+  -p color_fps:="${COLOR_FPS}" \
+  -p color_format:="${COLOR_FORMAT}" \
+  -p enable_depth:=false \
+  -p enable_point_cloud:=false \
+  -p enable_colored_point_cloud:=false \
+  -p enable_left_ir:=false \
+  -p enable_right_ir:=false \
+  -p enable_accel:=false \
+  -p enable_gyro:=false

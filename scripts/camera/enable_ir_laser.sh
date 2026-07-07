@@ -9,7 +9,8 @@ fi
 
 cd "${PROJECT_ROOT}"
 source /opt/ros/humble/setup.bash
-source "${PROJECT_ROOT}/ros2_ws/install/setup.bash"
+export ROS_LOG_DIR="${PROJECT_ROOT}/.ros-log"
+mkdir -p "${ROS_LOG_DIR}"
 
 if ros2 service list | grep -qx '/camera/set_laser_enable'; then
   ros2 service call /camera/set_laser_enable std_srvs/srv/SetBool '{data: true}'

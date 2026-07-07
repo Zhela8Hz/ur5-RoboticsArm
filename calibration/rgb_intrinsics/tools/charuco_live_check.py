@@ -60,6 +60,16 @@ def make_detector_params():
     return params
 
 
+def normalize_gray8(image):
+    if image.dtype == np.uint8:
+        return image
+    data = image.astype(np.float32)
+    vmin, vmax = np.percentile(data, 1), np.percentile(data, 99)
+    if vmax <= vmin:
+        return np.zeros(image.shape, dtype=np.uint8)
+    return np.clip((data - vmin) / (vmax - vmin) * 255, 0, 255).astype(np.uint8)
+
+
 class CharucoLiveCheck(Node):
     def __init__(self, args):
         super().__init__('charuco_live_check')
@@ -91,9 +101,7 @@ class CharucoLiveCheck(Node):
             self.get_logger().warning(f'Image conversion failed: {exc}')
             return
         if image.ndim == 2:
-            gray = image if image.dtype == np.uint8 else cv2.normalize(
-                image, None, 0, 255, cv2.NORM_MINMAX
-            ).astype(np.uint8)
+            gray = normalize_gray8(image)
             display = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
         else:
             display = image.copy()

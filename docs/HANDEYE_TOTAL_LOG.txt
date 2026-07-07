@@ -531,3 +531,537 @@ Previously observed `UR driver` fatal error:
   Could not get configuration package within timeout, are you connected to the robot?(Configured timeout: 1 sec)
 
 Meaning: the driver partially connected to the robot but did not receive the robot configuration package quickly enough. Restart `UR driver` and confirm that the `External Control` program is playing on the teach pendant.
+
+================================================================================
+2026-07-05 Gemini335 RGB Intrinsics Update
+================================================================================
+
+Context:
+
+  Camera: Orbbec Gemini 335
+  USB: USB3.2 confirmed by `orbbec_camera_node`
+  ROS: Humble
+  ROS wrapper: ros-humble-orbbec-camera 2.8.6
+  Orbbec SDK: 2.8.6
+  Firmware: 1.4.60
+  Resolution used: 1920x1080
+  FPS used: 30
+  Format used: MJPG
+
+Important issue found:
+
+  A stale `orbbec_camera_node` process was still holding the USB device.
+  This caused:
+
+    uvc_open failed: [Path: 2-2-7.0, Return Code: -6]
+
+  After stopping that stale process, `list_camera_profile_mode_node` and the
+  RGB camera node could open Gemini335 normally.
+
+ChArUco board actually used:
+
+  Board type: small board
+  squares_x: 6
+  squares_y: 6
+  square_length_m: 0.025
+  marker_length_m: 0.018
+  dictionary: DICT_6X6_1000
+  start_id: 233
+  min_charuco_corners: 20
+
+Note:
+
+  The 2026-07-05 RGB intrinsics run used the small-board parameters above.
+  It did not use the historical large-board values:
+
+    square_length_m=0.040
+    marker_length_m=0.030
+
+Capture method:
+
+  The RGB intrinsics node was updated to behave like the previous trigger
+  workflow: each `/capture` service call processes the latest image, accepts
+  the frame only if enough ChArUco corners are detected, and saves raw/overlay
+  images to:
+
+    /tmp/gemini335_rgb_intrinsics_captures
+
+  20 accepted observations were collected. Some rejected attempts had too few
+  ChArUco corners because the board was partly out of view or too steeply
+  angled.
+
+Generated candidate intrinsics:
+
+  calibration/rgb_intrinsics/results/rgb_intrinsics_gemini335_1920x1080.yaml
+
+Calibration result:
+
+  image_width: 1920
+  image_height: 1080
+  camera_name: gemini335_color
+  fx: 1035.5285795747313
+  fy: 1037.4036932657955
+  cx: 973.143653231648
+  cy: 533.5388236488085
+  distortion:
+    k1: 0.010060127630146826
+    k2: -0.08440653144268961
+    p1: -0.0031529422933081357
+    p2: 0.003274915369901648
+    k3: 0.10116048697079912
+  calibration_reprojection_error_px: 0.3788229893599487
+
+SDK factory intrinsics observed from `/camera/color/camera_info`:
+
+  fx: 1039.3955078125
+  fy: 1040.1788330078125
+  cx: 964.787109375
+  cy: 542.3262939453125
+  distortion:
+    k1: 0.008620047010481358
+    k2: -0.05229831486940384
+    p1: -0.00038759250310249627
+    p2: -0.00007887257379479706
+    k3: 0.035471539944410324
+
+Validation comparison:
+
+  Previous SDK validation before recalibration:
+
+    valid_samples: 10
+    rmse_px_mean: 0.525
+    rmse_px_median: 0.572
+    rmse_px_max: 0.900
+    mean_px_mean: 0.476
+    max_px_max: 1.813
+
+  SDK validation after the 20-frame capture session, using current board poses:
+
+    valid_samples: 10
+    rmse_px_mean: 1.060
+    rmse_px_median: 0.754
+    rmse_px_max: 2.631
+    mean_px_mean: 0.939
+    max_px_max: 5.147
+
+  New YAML validation after the 20-frame capture session, using current board poses:
+
+    valid_samples: 10
+    rmse_px_mean: 0.958
+    rmse_px_median: 0.727
+    rmse_px_max: 2.025
+    mean_px_mean: 0.848
+    max_px_max: 4.082
+
+Interpretation:
+
+  The new Gemini335 intrinsics are slightly better than the SDK factory
+  intrinsics in the later validation run, but the improvement is modest.
+  The calibration solve reprojection error of about 0.379 px is usable as a
+  candidate, but it is not as clean as the earlier DaBai calibration around
+  0.2 px.
+
+  For precise hand-eye calibration, this Gemini335 intrinsics result should be
+  treated as acceptable but not yet ideal. A better dedicated intrinsics session
+  should collect more diverse and cleaner board poses: full board visible,
+  sharp focus, good lighting, broad image coverage including corners, multiple
+  distances, and fewer near-edge partial detections.
+
+================================================================================
+2026-07-07 UR5 / Gemini335 Hand-eye Software Path Probe
+================================================================================
+
+中文：
+
+目标：
+
+  在相机固定件尚未打印完成前，验证 `hand-eye` 软件路径是否能跑通。
+  本次目标不是生成可长期使用的正式 `T_tool_camera`，而是确认：
+
+    - UR5 网络连通；
+    - `ur_robot_driver` 当前问题边界；
+    - `ur_rtde` 是否能读取机器人位姿；
+    - Gemini335 RGB 相机是否能发布图像和 `CameraInfo`；
+    - ChArUco 检测是否能得到 `T_camera_target`；
+    - 能否生成兼容现有 solver 的 `samples.jsonl` 记录。
+
+UR5 网络和 Dashboard 状态：
+
+  `ping 192.168.1.10` 成功，0% packet loss。
+
+  Dashboard 只读查询确认：
+
+    Robotmode: RUNNING
+    Safetymode: NORMAL
+    Program running: false
+    No program loaded
+    STOPPED null
+    URSoftware 3.15.8.106339
+
+  本机有线网卡和路由：
+
+    enp7s0: 192.168.1.20/24
+    192.168.1.10 dev enp7s0 src 192.168.1.20
+
+`ur_robot_driver` 观察结果：
+
+  多次运行 `scripts/robot/start_ur5_driver.sh`，Dashboard 和 RTDE 初步连接成功：
+
+    Connected: Universal Robots Dashboard Server
+    Successfully connected to Dashboard Server at 192.168.1.10. Robot has version 3.15.8.0
+    Negotiated RTDE protocol version to 2.
+    Received URControl version 3.15.8.0
+    Setting up RTDE communication with frequency 125.000000
+
+  但 `ur_ros2_control_node` 多次卡在 configuration package：
+
+    Could not get configuration package within timeout, are you connected to the robot?(Configured timeout: 1 sec)
+    Failed to set the initial state of the component : ur5 to active
+
+  该问题表现为间歇性：同一配置下曾有一次成功拿到：
+
+    Calibration checksum: 'calib_17294063568689657538'.
+    Calibration checked successfully.
+    System successfully started!
+
+  但后续仍可复现 timeout。为降低人工重复操作，`scripts/robot/start_ur5_driver.sh`
+  已增加：
+
+    - 启动前检查 UR primary interface `192.168.1.10:30001` 是否可读；
+    - 检测到 `Could not get configuration package within timeout` 后自动重试；
+    - 每次 launch 使用独立 process group，失败时整组清理，避免残留 controller 冲突；
+    - 默认最大尝试次数 `UR5_DRIVER_MAX_ATTEMPTS=3`。
+
+  注意：该修改只改善启动重试流程，不会发送机器人运动指令。
+
+External Control / IP 说明：
+
+  `robot_ip:=192.168.1.10` 是 UR5 控制柜 IP，方向是电脑连接机器人。
+
+  `reverse_ip:=192.168.1.20` 和示教器 `External Control Host IP`
+  应该是电脑有线网卡 IP，方向是机器人回连电脑。
+
+  用户确认当前 TCP 名称为 `tcp_`，TCP 的 `x y z rx ry rz` 全部为 0。
+  因此本次 `ur_rtde.getActualTCPPose()` 可按 `base -> tool0` 使用。
+  `cz=60.0 mm` 是负载重心参数，不改变 TCP 几何坐标系。
+
+`ur_rtde` 验证：
+
+  本机安装了 Python 包：
+
+    ur_rtde 1.6.3
+
+  使用 `rtde_receive.RTDEReceiveInterface("192.168.1.10")` 可直接读取：
+
+    getActualTCPPose()
+    getActualQ()
+
+  一次读数示例：
+
+    connected True
+    TCP Pose: -0.349319 -0.502460 0.389995 0.979930 1.526973 1.552238
+    Joints: 0.852055 -1.580669 1.579880 -1.559735 -1.576649 0.389503
+
+  结论：即使 `ur_robot_driver` 当前不稳定，`ur_rtde` 仍可提供手眼采集所需的
+  机器人位姿输入。因为当前 TCP offset 为 0，本次可将 RTDE TCP pose 作为
+  `T_base_tool` 写入样本。后续若 TCP offset 被修改，必须重新确认坐标定义。
+
+Gemini335 相机验证：
+
+  相机设备：
+
+    Orbbec Gemini 335
+    Serial number: CP0F46300089
+    Firmware version: 1.4.60
+    ROS Wrapper version: 2.8.6
+    SDK version: 2.8.6
+    usb connect type: USB3.2
+
+  普通沙箱内启动 Orbbec 节点会失败：
+
+    Usb pal is not exist, please check the build config that you have enabled BUILD_USB_PAL
+
+  原因：普通沙箱看不到 `/dev/bus/usb`，Orbbec SDK 无法访问 USB PAL。
+  在沙箱外运行 `ros2 launch orbbec_camera gemini_330_series.launch.py ...`
+  后，相机节点正常启动。
+
+  已确认 ROS topic：
+
+    /camera/color/image_raw
+    /camera/color/camera_info
+
+  `CameraInfo`：
+
+    frame_id: camera_color_optical_frame
+    width: 1920
+    height: 1080
+    distortion_model: plumb_bob
+
+  图像流实测约 14 Hz。本次启动请求为 `1920x1080 @ 30 fps MJPG`，
+  实测频率低于请求值，但足以做手眼路径验证。
+
+ChArUco 检测验证：
+
+  小板参数：
+
+    squares_x: 6
+    squares_y: 6
+    square_length_m: 0.025
+    marker_length_m: 0.018
+    dictionary: DICT_6X6_1000
+    start_id: 233
+    min_charuco_corners: 20
+
+  单帧检测成功：
+
+    markers: 18
+    charuco: 25
+
+  说明图像进入 OpenCV / ChArUco 检测链路正常，可得到 `T_camera_target`。
+
+RTDE hand-eye probe 工具：
+
+  新增工具：
+
+    calibration/extrinsics/handeye/tools/handeye_capture_rtde.py
+
+  作用：
+
+    - 订阅 `/camera/color/image_raw`；
+    - 使用 Gemini335 1920x1080 内参；
+    - 检测 ChArUco 并估计 `T_camera_target`；
+    - 使用 `ur_rtde` 读取 `getActualTCPPose()` 和 `getActualQ()`；
+    - 将 RTDE TCP pose 转成 `T_base_tool`；
+    - 写出与现有 `handeye_solve.py` 兼容的 `samples.jsonl`。
+
+  本次曾创建临时 session：
+
+    calibration/extrinsics/handeye/sessions/20260707_204658_rtde_probe
+
+  其中 `sample_001` 曾采集成功：
+
+    charuco_corners: 25
+    robot_pose_source: ur_rtde
+
+  按用户要求，该单帧样本、raw image、overlay image、`samples.jsonl`、
+  临时 session 目录和 `latest_rtde_probe` symlink 已删除。
+
+当前结论：
+
+  已跑通：
+
+    Gemini335 RGB image
+    -> ChArUco `T_camera_target`
+    -> `ur_rtde` robot pose
+    -> `T_base_tool`
+    -> solver-compatible `samples.jsonl` format
+
+  未完成：
+
+    未采满 8 个以上样本，因此未运行 `handeye_solve.py` 求解正式或临时
+    `T_tool_camera`。现有 solver 最少需要 8 个样本，建议 12-15 个不同姿态。
+
+  本次没有执行机器人运动，没有使用 sudo，没有执行 Git 写操作。
+
+English:
+
+Goal:
+
+  Before the camera mount is printed and installed, the purpose was to verify
+  the `hand-eye` software path. This run was not intended to produce a durable
+  production `T_tool_camera`; it was intended to confirm:
+
+    - UR5 network connectivity;
+    - the current boundary of the `ur_robot_driver` issue;
+    - whether `ur_rtde` can read robot poses;
+    - whether Gemini335 RGB publishes images and `CameraInfo`;
+    - whether ChArUco detection can produce `T_camera_target`;
+    - whether a solver-compatible `samples.jsonl` record can be produced.
+
+UR5 network and Dashboard state:
+
+  `ping 192.168.1.10` succeeded with 0% packet loss.
+
+  Dashboard read-only queries showed:
+
+    Robotmode: RUNNING
+    Safetymode: NORMAL
+    Program running: false
+    No program loaded
+    STOPPED null
+    URSoftware 3.15.8.106339
+
+  Local wired interface and route:
+
+    enp7s0: 192.168.1.20/24
+    192.168.1.10 dev enp7s0 src 192.168.1.20
+
+`ur_robot_driver` observations:
+
+  Several runs of `scripts/robot/start_ur5_driver.sh` reached Dashboard and RTDE:
+
+    Connected: Universal Robots Dashboard Server
+    Successfully connected to Dashboard Server at 192.168.1.10. Robot has version 3.15.8.0
+    Negotiated RTDE protocol version to 2.
+    Received URControl version 3.15.8.0
+    Setting up RTDE communication with frequency 125.000000
+
+  However, `ur_ros2_control_node` repeatedly failed while waiting for the
+  configuration package:
+
+    Could not get configuration package within timeout, are you connected to the robot?(Configured timeout: 1 sec)
+    Failed to set the initial state of the component : ur5 to active
+
+  The issue is intermittent. With the same configuration, one run did reach:
+
+    Calibration checksum: 'calib_17294063568689657538'.
+    Calibration checked successfully.
+    System successfully started!
+
+  But later runs still reproduced the timeout. To reduce manual retry work,
+  `scripts/robot/start_ur5_driver.sh` was updated to:
+
+    - check whether UR primary interface `192.168.1.10:30001` is readable before launch;
+    - retry automatically when `Could not get configuration package within timeout` is detected;
+    - launch each attempt in a separate process group and clean up the whole group on failure;
+    - use `UR5_DRIVER_MAX_ATTEMPTS=3` by default.
+
+  This only improves startup retry behavior. It does not send robot motion
+  commands.
+
+External Control / IP clarification:
+
+  `robot_ip:=192.168.1.10` is the UR5 controller IP, used by the computer to
+  connect to the robot.
+
+  `reverse_ip:=192.168.1.20` and the teach pendant `External Control Host IP`
+  should be the wired IP of this computer, used by the robot to connect back to
+  the driver.
+
+  The user confirmed the active TCP is named `tcp_` and its `x y z rx ry rz`
+  values are all zero. Therefore `ur_rtde.getActualTCPPose()` can be treated as
+  `base -> tool0` for this probe. `cz=60.0 mm` is the payload center of gravity
+  parameter and does not change the geometric TCP frame.
+
+`ur_rtde` verification:
+
+  The Python package was installed:
+
+    ur_rtde 1.6.3
+
+  `rtde_receive.RTDEReceiveInterface("192.168.1.10")` can read:
+
+    getActualTCPPose()
+    getActualQ()
+
+  Example output:
+
+    connected True
+    TCP Pose: -0.349319 -0.502460 0.389995 0.979930 1.526973 1.552238
+    Joints: 0.852055 -1.580669 1.579880 -1.559735 -1.576649 0.389503
+
+  Conclusion: even while `ur_robot_driver` is unstable, `ur_rtde` can provide
+  the robot pose input needed for hand-eye capture. Since the current TCP offset
+  is zero, the RTDE TCP pose can be written as `T_base_tool` for this probe.
+  If the TCP offset changes later, the frame definition must be checked again.
+
+Gemini335 camera verification:
+
+  Camera:
+
+    Orbbec Gemini 335
+    Serial number: CP0F46300089
+    Firmware version: 1.4.60
+    ROS Wrapper version: 2.8.6
+    SDK version: 2.8.6
+    usb connect type: USB3.2
+
+  Starting the Orbbec node inside the normal sandbox failed with:
+
+    Usb pal is not exist, please check the build config that you have enabled BUILD_USB_PAL
+
+  Cause: the normal sandbox cannot see `/dev/bus/usb`, so Orbbec SDK cannot
+  access the USB PAL. Running `ros2 launch orbbec_camera gemini_330_series.launch.py ...`
+  outside the sandbox started the camera node successfully.
+
+  Confirmed ROS topics:
+
+    /camera/color/image_raw
+    /camera/color/camera_info
+
+  `CameraInfo`:
+
+    frame_id: camera_color_optical_frame
+    width: 1920
+    height: 1080
+    distortion_model: plumb_bob
+
+  The image stream measured around 14 Hz. The requested mode was
+  `1920x1080 @ 30 fps MJPG`; the measured rate is lower than requested, but
+  sufficient for software path validation.
+
+ChArUco detection verification:
+
+  Small board parameters:
+
+    squares_x: 6
+    squares_y: 6
+    square_length_m: 0.025
+    marker_length_m: 0.018
+    dictionary: DICT_6X6_1000
+    start_id: 233
+    min_charuco_corners: 20
+
+  One frame was detected successfully:
+
+    markers: 18
+    charuco: 25
+
+  This confirms that the image can enter the OpenCV / ChArUco detection path
+  and produce `T_camera_target`.
+
+RTDE hand-eye probe tool:
+
+  New tool:
+
+    calibration/extrinsics/handeye/tools/handeye_capture_rtde.py
+
+  Purpose:
+
+    - subscribe to `/camera/color/image_raw`;
+    - use Gemini335 1920x1080 intrinsics;
+    - detect ChArUco and estimate `T_camera_target`;
+    - use `ur_rtde` to read `getActualTCPPose()` and `getActualQ()`;
+    - convert RTDE TCP pose to `T_base_tool`;
+    - write `samples.jsonl` compatible with existing `handeye_solve.py`.
+
+  A temporary session was created:
+
+    calibration/extrinsics/handeye/sessions/20260707_204658_rtde_probe
+
+  `sample_001` was successfully captured:
+
+    charuco_corners: 25
+    robot_pose_source: ur_rtde
+
+  Per user request, that single sample, raw image, overlay image, `samples.jsonl`,
+  temporary session directory, and `latest_rtde_probe` symlink were deleted.
+
+Current conclusion:
+
+  Verified path:
+
+    Gemini335 RGB image
+    -> ChArUco `T_camera_target`
+    -> `ur_rtde` robot pose
+    -> `T_base_tool`
+    -> solver-compatible `samples.jsonl` format
+
+  Not completed:
+
+    Fewer than 8 samples were collected, so `handeye_solve.py` was not run to
+    solve a formal or temporary `T_tool_camera`. The current solver requires at
+    least 8 samples; 12-15 diverse poses are recommended.
+
+  No robot motion command was executed. No sudo was used. No Git write
+  operation was performed.

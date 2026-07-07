@@ -54,7 +54,11 @@ def to_gray8(image):
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     if gray.dtype == np.uint8:
         return gray
-    return cv2.normalize(gray, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
+    data = gray.astype(np.float32)
+    vmin, vmax = np.percentile(data, 1), np.percentile(data, 99)
+    if vmax <= vmin:
+        return np.zeros(gray.shape, dtype=np.uint8)
+    return np.clip((data - vmin) / (vmax - vmin) * 255, 0, 255).astype(np.uint8)
 
 
 def detect(gray, args):
@@ -104,8 +108,8 @@ def parse_args():
     parser.add_argument('--output-dir', type=Path, default=PROJECT_ROOT / 'calibration/depth_intrinsics/probes')
     parser.add_argument('--squares-x', type=int, default=6)
     parser.add_argument('--squares-y', type=int, default=6)
-    parser.add_argument('--square-length-m', type=float, default=0.040)
-    parser.add_argument('--marker-length-m', type=float, default=0.030)
+    parser.add_argument('--square-length-m', type=float, default=0.025)
+    parser.add_argument('--marker-length-m', type=float, default=0.018)
     parser.add_argument('--dictionary-id', default='DICT_6X6_1000')
     parser.add_argument('--start-id', type=int, default=233)
     parser.add_argument('--timeout-sec', type=float, default=5.0)

@@ -7,20 +7,22 @@ if [ -z "${PROJECT_ROOT}" ]; then
   PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 fi
 
+cd "${PROJECT_ROOT}"
 source /opt/ros/humble/setup.bash
-source "${PROJECT_ROOT}/ros2_ws/install/setup.bash"
 export ROS_LOG_DIR="${PROJECT_ROOT}/.ros-log"
 mkdir -p "${ROS_LOG_DIR}"
 
-exec python3 "${PROJECT_ROOT}/calibration/rgb_intrinsics/tools/charuco_live_check.py" \
-  --image-topic /camera/ir/image_raw \
-  --intrinsics "" \
-  --output-dir "${PROJECT_ROOT}/calibration/depth_intrinsics/live_check" \
-  --squares-x 6 --squares-y 6 \
+exec python3 "${PROJECT_ROOT}/calibration/rgb_intrinsics/tools/interactive_charuco_intrinsics.py" \
+  --image-topic /camera/color/image_raw \
+  --squares-x 6 \
+  --squares-y 6 \
   --square-length-m 0.025 \
   --marker-length-m 0.018 \
   --dictionary-id DICT_6X6_1000 \
   --start-id 233 \
+  --camera-name gemini335_color \
   --min-charuco-corners 20 \
-  --clahe \
-  "$@"
+  --target-samples 20 \
+  --min-samples 12 \
+  --capture-dir /tmp/gemini335_rgb_intrinsics_interactive \
+  --output-file "${PROJECT_ROOT}/calibration/rgb_intrinsics/results/rgb_intrinsics_gemini335_1920x1080_interactive.yaml"

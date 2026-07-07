@@ -155,3 +155,95 @@ eye-to-hand 则相机固定在工位、标定板固定在末端，求解相机�
 ```text
 读取 docs/ROS2_HUMBLE_PROGRESS.md，并继续其中的 ROS 2 Humble 配置任务。
 ```
+
+## 2026-07-05 Gemini335 RGB 内参补充记录
+
+本次为 Orbbec Gemini 335 更新了 ROS2 Humble 相机启动与 RGB 内参标定流程。相机节点确认使用 `ros-humble-orbbec-camera 2.8.6` 和 Orbbec SDK `2.8.6`，设备日志显示 `usb connect type: USB3.2`，RGB 启动配置为 `1920x1080@30 MJPG`。
+
+曾遇到旧 `orbbec_camera_node` 进程占用 USB 设备，导致新进程报错：
+
+```text
+uvc_open failed: [Path: 2-2-7.0, Return Code: -6]
+```
+
+停止旧进程后，SDK profile 枚举和 RGB 图像发布恢复正常。
+
+本次 RGB 内参标定使用的是当前小板参数，不是大板参数：
+
+```text
+squares_x: 6
+squares_y: 6
+square_length_m: 0.025
+marker_length_m: 0.018
+dictionary: DICT_6X6_1000
+start_id: 233
+min_charuco_corners: 20
+```
+
+触发式采集流程已恢复为 `/capture` 触发拍照，累计接受 20 组有效观测。新候选内参保存为：
+
+```text
+calibration/rgb_intrinsics/results/rgb_intrinsics_gemini335_1920x1080.yaml
+```
+
+本次求解得到的重投影误差：
+
+```text
+reprojection_error_px: 0.3788229893599487
+```
+
+和 SDK 原厂内参验证对比：
+
+```text
+SDK later validation:
+  valid_samples: 10
+  rmse_px_mean: 1.060
+  rmse_px_median: 0.754
+  rmse_px_max: 2.631
+
+New YAML validation:
+  valid_samples: 10
+  rmse_px_mean: 0.958
+  rmse_px_median: 0.727
+  rmse_px_max: 2.025
+```
+
+结论：新 Gemini335 内参相对 SDK 原厂内参略好，但提升不大；`0.379 px` 的求解误差可以作为后续手眼标定候选内参使用，但精度不如之前 DaBai 约 `0.2 px` 的标定结果。若后续手眼残差偏高，建议重新采集一轮更高质量 RGB 内参数据，重点保证整板清晰入镜、覆盖画面中心和四角、多距离、多倾角，并减少角点不足的边缘姿态。
+
+## 2026-07-05 交互式 RGB 内参采集流程
+
+新增交互式采集入口：
+
+```bash
+./calibration/rgb_intrinsics/scripts/interactive_rgb_calibration.sh
+```
+
+使用方式：先启动 Gemini335 RGB 相机节点；然后新开一个终端运行上面的脚本。脚本启动后，每次摆好相机/标定板姿态后按 Enter，相机会抓取当前帧并在终端输出检测到的 marker 数和 ChArUco 角点数。
+
+采集规则：
+
+```text
+只接受 charuco_corners > 20 的图像进入内参求解。
+charuco_corners <= 20 的图像会保存 raw/overlay 调试图，但不会参与计算。
+```
+
+交互命令：
+
+```text
+Enter         抓取当前帧
+s + Enter    查看已接受样本数
+c + Enter    使用已接受样本计算内参
+q + Enter    退出，不计算
+```
+
+默认输出文件：
+
+```text
+calibration/rgb_intrinsics/results/rgb_intrinsics_gemini335_1920x1080_interactive.yaml
+```
+
+调试图默认保存到：
+
+```text
+/tmp/gemini335_rgb_intrinsics_interactive
+```

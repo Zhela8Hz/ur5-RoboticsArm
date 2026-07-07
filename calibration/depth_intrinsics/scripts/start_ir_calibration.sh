@@ -22,8 +22,8 @@ IR_HEIGHT="${IR_HEIGHT:-768}"
 exec ros2 run charuco_camera_calibration charuco_intrinsics --ros-args \
   -p image_topic:=/camera/ir/image_raw \
   -p squares_x:=6 -p squares_y:=6 \
-  -p square_length_m:=0.040 \
-  -p marker_length_m:=0.030 \
+  -p square_length_m:=0.025 \
+  -p marker_length_m:=0.018 \
   -p dictionary_id:=DICT_6X6_1000 \
   -p start_id:=233 \
   -p use_clahe:=true \
