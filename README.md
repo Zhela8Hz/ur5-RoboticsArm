@@ -70,6 +70,7 @@ python3 calibration/extrinsics/handeye/tools/handeye_capture_rtde.py
 
 ## 关键文档
 
+- `docs/SETUP_GEMINI335.md`：从 GitHub 克隆后配置 Gemini335 + UR5 环境的说明。
 - `docs/HANDEYE_TOTAL_LOG.txt`：当前 RGB 手眼标定总日志和有效结果说明。
 - `docs/HANDEYE_20260707_UR_DRIVER_CHECK_LOG.md`：2026-07-07 UR driver、RTDE 和 Gemini335 验证的单独记录。
 - `docs/HANDEYE_OPERATION.md`：RGB 手眼标定操作步骤。
