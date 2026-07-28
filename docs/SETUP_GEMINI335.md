@@ -1,6 +1,6 @@
 # Gemini335 + UR5 环境配置说明
 
-本文用于说明别人从 GitHub 克隆 `calibration_gemini335` 分支后，需要补齐哪些系统环境和硬件配置，才能运行当前仓库里的 Gemini335 相机、UR5 driver、RTDE 手眼采集脚本。
+本文用于说明别人从 GitHub 克隆 `calibration_gemini335` 分支后，需要补齐哪些系统环境和硬件配置，才能运行当前仓库里的 Gemini335 相机、UR5 driver、RTDE 与自动手眼标定脚本。
 
 当前仓库保存的是项目脚本、机器人配置、标定结果和日志，不包含完整的 ROS2 workspace、Orbbec driver 源码或系统依赖安装包。
 
@@ -64,7 +64,10 @@ ros2_ws/src/charuco_camera_calibration/
 
 如果要使用旧的 ROS2 ChArUco 内参采集脚本，需要准备对应 workspace 并完成构建。
 
-当前 Gemini335 + RTDE 的单帧采集脚本主要依赖系统 ROS2 环境、`orbbec_camera`、`cv_bridge` 和 `ur_rtde`，不依赖 UR driver 发布 TF。
+Gemini335 + RTDE 的单帧采集脚本主要依赖系统 ROS2 环境、`orbbec_camera`、`cv_bridge` 和 `ur_rtde`，不依赖 UR driver 发布 TF。
+
+自动手眼采集额外依赖 UR driver 提供的 `/joint_states`、`base -> tool0` TF 与
+`/scaled_joint_trajectory_controller/follow_joint_trajectory` action；因此必须安装并启动 `ur_robot_driver`。
 
 ## 4. 硬件网络配置
 
@@ -133,7 +136,7 @@ ros2 topic hz /camera/color/image_raw
 ./scripts/robot/check_ur5_state.sh
 ```
 
-注意：当前 Gemini335 + RTDE 采集路径不强制依赖 UR driver 成功启动；只要 RTDE 可连接并且相机图像正常，就可以采集 `T_base_tool` 和 `T_camera_target` 样本。
+注意：当前 Gemini335 + RTDE 单帧采集路径不强制依赖 UR driver 成功启动；只要 RTDE 可连接并且相机图像正常，就可以采集 `T_base_tool` 和 `T_camera_target` 样本。自动多姿态采集则必须启动 UR driver，并在示教器运行 External Control。
 
 ## 7. Gemini335 + RTDE 单帧采集
 
@@ -171,15 +174,27 @@ calibration/rgb_intrinsics/results/rgb_intrinsics_gemini335_1920x1080.yaml
 - `T_camera_target`
 - RTDE TCP pose 和 joints
 
-## 8. 当前分支里的已知限制
+## 8. 自动多姿态手眼标定
 
-- Gemini335 相机固定件尚未完成，因此还没有正式多姿态手眼标定结果。
+本分支已提供已示教的 24 位姿轨迹、自动采集脚本和默认外参。当前默认结果使用 Park 方法、24 样本，固定板位移一致性均值为 0.669 mm。
+
+完整操作步骤见：
+
+```text
+docs/AUTO_HANDEYE_CAPTURE.md
+```
+
+自动采集会真实驱动 UR5。确认工位无碰撞后，在示教器启动 External Control，再执行文档中的 `inspect`、`board-check`、`dry-run` 与 `execute --execute --capture` 流程。
+
+## 9. 当前分支里的已知限制
+
+- 默认外参仅对应当前 Gemini335、末端相机安装和 ChArUco 板规格；相机支架、TCP、相机分辨率或标定板更换后必须重新标定。
 - DaBai 时代的 `handeye_result.yaml` 只能作为历史结果，不能直接用于 Gemini335。
 - `scripts/camera/start_dabai_camera.sh` 名称仍保留旧命名，但当前内容已经改为 Gemini335 RGB 启动参数。
 - `ros2_ws/` 没有纳入 GitHub，需要使用者自行准备。
 - 历史 `samples.jsonl` 中可能记录了 `/home/z/Apps-my/...` 绝对图片路径，这是旧采集数据的记录，不影响当前脚本动态定位项目路径。
 
-## 9. 推荐验证顺序
+## 10. 推荐验证顺序
 
 1. `git switch calibration_gemini335`
 2. `python3 -m pip install --user ur_rtde numpy pyyaml`
@@ -188,4 +203,4 @@ calibration/rgb_intrinsics/results/rgb_intrinsics_gemini335_1920x1080.yaml
 5. 用 RTDE 只读脚本确认 UR5 pose 可读
 6. 启动 Gemini335 RGB 并检查 `/camera/color/image_raw`
 7. 运行 `handeye_capture_rtde.py` 采集单帧
-8. 固定件完成后，采集多姿态样本并运行手眼求解
+8. 按 `docs/AUTO_HANDEYE_CAPTURE.md` 完成自动多姿态采集、离线求解与验证

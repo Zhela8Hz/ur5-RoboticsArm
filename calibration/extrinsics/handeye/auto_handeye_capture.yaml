@@ -1,0 +1,37 @@
+# All ROS names default to auto-discovery.  Persisted waypoints are intentionally
+# separate from this runtime configuration so a calibration run never overwrites
+# a taught trajectory.
+interfaces:
+  image_topic: /camera/color/image_raw
+  camera_info_topic: /camera/color/camera_info
+  joint_state_topic: /joint_states
+  base_frame: base
+  tool_frame: tool0
+  trajectory_action: /scaled_joint_trajectory_controller/follow_joint_trajectory
+
+charuco:
+  squares_x: 6
+  squares_y: 6
+  square_length_m: 0.040
+  marker_length_m: 0.030
+  dictionary_id: DICT_6X6_1000
+  start_id: 233
+  min_corners: 20
+  stable_frames: 5
+
+safety:
+  velocity_scale: 0.10
+  acceleration_scale: 0.10
+  motion_duration_sec: 8.0
+  max_joint_speed_rad_s: 0.15
+  goal_tolerance_rad: 0.02
+  still_velocity_rad_s: 0.01
+  still_duration_sec: 1.0
+  settle_duration_sec: 0.5
+  tf_max_delta_sec: 0.05
+  stationary_tf_max_delta_sec: 1.5
+  tf_retry_count: 3
+
+storage:
+  output_root: calibration/extrinsics/handeye/auto_capture_data
+  board_retry_count: 5

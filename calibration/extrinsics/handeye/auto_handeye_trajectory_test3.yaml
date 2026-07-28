@@ -1,0 +1,914 @@
+format_version: 1
+start_pose:
+  recorded_at_utc: '2026-07-24T16:10:02.660819+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.7413814703570765
+  - 1.602412223815918
+  - -1.4561107794391077
+  - -1.1057475248919886
+  - 0.1825411021709442
+  - 0.714785635471344
+  joint_velocities_rad_s:
+  - 0.0
+  - -0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  joint_state_stamp_sec: 1784909402.6585891
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.2153245651680027
+      y: -0.3813739485650541
+      z: 0.48909216218053203
+    quaternion_xyzw:
+      x: 0.48024467056135206
+      y: 0.8480944751141084
+      z: -0.08508095458063746
+      w: 0.20703151655240973
+    stamp_sec: 1784909402.6267042
+  note: ''
+waypoints:
+- recorded_at_utc: '2026-07-24T16:10:24.374888+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.526975456868307
+  - 1.487471580505371
+  - -1.4902046362506312
+  - -1.1477749983416956
+  - 0.45286139845848083
+  - 0.7726458311080933
+  joint_velocities_rad_s:
+  - -2.5566347176209092e-05
+  - -2.5566347176209092e-05
+  - -4.793690095539205e-05
+  - 4.793690095539205e-05
+  - -4.793690095539205e-05
+  - -2.5566347176209092e-05
+  joint_state_stamp_sec: 1784909424.3706844
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.2588240666008258
+      y: -0.45324365188833704
+      z: 0.44843411987468423
+    quaternion_xyzw:
+      x: 0.5753088608827305
+      y: 0.7920753557214429
+      z: -0.01508887225851543
+      w: 0.203491207138125
+    stamp_sec: 1784909424.3547378
+  note: ''
+  id: 1
+- recorded_at_utc: '2026-07-24T16:10:39.349261+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.4733184019671839
+  - 1.5873627662658691
+  - -1.9222243467914026
+  - -1.3864033857928675
+  - 0.9750582575798035
+  - 1.0518351793289185
+  joint_velocities_rad_s:
+  - 5.1132694352418184e-05
+  - -0.0
+  - 4.793690095539205e-05
+  - 4.793690095539205e-05
+  - 2.3968450477696024e-05
+  - 2.5566347176209092e-05
+  joint_state_stamp_sec: 1784909439.3465972
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.15941456574823235
+      y: -0.5326636134354658
+      z: 0.4095357948656641
+    quaternion_xyzw:
+      x: 0.6614542316376099
+      y: 0.7357660332053281
+      z: -0.095628466303602
+      w: 0.10946159263602936
+    stamp_sec: 1784909439.306733
+  note: ''
+  id: 2
+- recorded_at_utc: '2026-07-24T16:10:48.213239+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.505850617085592
+  - 1.578897476196289
+  - -1.7382662932025355
+  - -1.4586885611163538
+  - 0.8127945065498352
+  - 1.2135900259017944
+  joint_velocities_rad_s:
+  - 0.0
+  - -7.669904152862728e-05
+  - 9.58738019107841e-05
+  - 9.58738019107841e-05
+  - 7.190534961409867e-05
+  - -6.391586794052273e-05
+  joint_state_stamp_sec: 1784909448.2106972
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.06993822115992343
+      y: -0.5292811721215456
+      z: 0.4106011410573478
+    quaternion_xyzw:
+      x: 0.5462297429125074
+      y: 0.8348469940968529
+      z: -0.03495336418279781
+      w: 0.05866708393545836
+    stamp_sec: 1784909448.2106972
+  note: ''
+  id: 3
+- recorded_at_utc: '2026-07-24T16:15:09.858108+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.5054672400103968
+  - 1.6966757774353027
+  - -1.9072187582599085
+  - -1.5024731794940394
+  - 1.1611964702606201
+  - 0.9669674634933472
+  joint_velocities_rad_s:
+  - 1.2783173588104546e-05
+  - 1.2783173588104546e-05
+  - 2.3968450477696024e-05
+  - 0.0
+  - -2.3968450477696024e-05
+  - 1.2783173588104546e-05
+  joint_state_stamp_sec: 1784909709.850726
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.19838275701107333
+      y: -0.49223978700115467
+      z: 0.369692327429784
+    quaternion_xyzw:
+      x: 0.765952839803109
+      y: 0.6381728996268373
+      z: -0.06226179724498081
+      w: 0.04663760267480096
+    stamp_sec: 1784909709.8426223
+  note: ''
+  id: 4
+- recorded_at_utc: '2026-07-24T16:15:58.210944+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.5158913771258753
+  - 1.7308106422424316
+  - -1.856833283101217
+  - -1.4249981085406702
+  - 1.4560680389404297
+  - 0.8662741184234619
+  joint_velocities_rad_s:
+  - 0.0
+  - -0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  joint_state_stamp_sec: 1784909758.202587
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.23448155136827223
+      y: -0.4649188402488397
+      z: 0.3538399916643887
+    quaternion_xyzw:
+      x: 0.8765854972955729
+      y: 0.47531474162430937
+      z: -0.008689409311883537
+      w: 0.07482149752243544
+    stamp_sec: 1784909758.1705806
+  note: ''
+  id: 5
+- recorded_at_utc: '2026-07-24T16:16:09.413303+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.5723555723773401
+  - 1.5465936660766602
+  - -1.7902925650226038
+  - -1.4446008841144007
+  - 1.455828309059143
+  - 0.9911882877349854
+  joint_velocities_rad_s:
+  - 0.0
+  - -0.0
+  - 0.0
+  - -2.3968450477696024e-05
+  - 0.0
+  - 0.0
+  joint_state_stamp_sec: 1784909769.4106052
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.17436721695239288
+      y: -0.486880098188243
+      z: 0.46649732802635685
+    quaternion_xyzw:
+      x: 0.837631859778618
+      y: 0.5294461349839292
+      z: -0.08703877305140217
+      w: 0.10239096454326092
+    stamp_sec: 1784909769.3706117
+  note: ''
+  id: 6
+- recorded_at_utc: '2026-07-24T16:16:32.215085+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.5529463926898401
+  - 1.5629968643188477
+  - -1.6047118345843714
+  - -1.303265396748678
+  - 1.454257607460022
+  - 0.7854277491569519
+  joint_velocities_rad_s:
+  - 1.2783173588104546e-05
+  - 1.2783173588104546e-05
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.2783173588104546e-05
+  joint_state_stamp_sec: 1784909792.210609
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.2574051236646705
+      y: -0.44398557467162436
+      z: 0.43129182090872015
+    quaternion_xyzw:
+      x: 0.8910370549600064
+      y: 0.43578334712831374
+      z: 0.03033628615741225
+      w: 0.12339185871044303
+    stamp_sec: 1784909792.1626785
+  note: ''
+  id: 7
+- recorded_at_utc: '2026-07-24T16:16:48.969481+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.6489742437945765
+  - 1.6660199165344238
+  - -1.7263897101031702
+  - -1.4544084707843226
+  - 2.1272523403167725
+  - 0.8436220288276672
+  joint_velocities_rad_s:
+  - 0.0
+  - 1.2783173588104546e-05
+  - 0.0
+  - -2.3968450477696024e-05
+  - 0.0
+  - 0.0
+  joint_state_stamp_sec: 1784909808.9627204
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.21876556806010763
+      y: -0.4260709394705866
+      z: 0.43672394459785774
+    quaternion_xyzw:
+      x: 0.9850497068139552
+      y: 0.14918262455724846
+      z: -0.020013573081985772
+      w: 0.08379186433326351
+    stamp_sec: 1784909808.9627204
+  note: ''
+  id: 8
+- recorded_at_utc: '2026-07-24T16:17:01.429922+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.690181080495016
+  - 1.721623420715332
+  - -1.802924935017721
+  - -1.5615909735309046
+  - 2.5127408504486084
+  - 0.936374306678772
+  joint_velocities_rad_s:
+  - -3.834952076431364e-05
+  - 2.5566347176209092e-05
+  - 0.00011984225420746952
+  - -0.00014381069922819734
+  - -7.190534961409867e-05
+  - -5.1132694352418184e-05
+  joint_state_stamp_sec: 1784909821.4268103
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.17743298548644315
+      y: -0.4285322886518017
+      z: 0.43562483695850596
+    quaternion_xyzw:
+      x: 0.9949329010113159
+      y: 0.000666856701004859
+      z: -0.06112617134247799
+      w: 0.07982273463341945
+    stamp_sec: 1784909821.394585
+  note: ''
+  id: 9
+- recorded_at_utc: '2026-07-24T16:17:30.382945+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.6808603445636194
+  - 1.6103029251098633
+  - -1.6192124525653284
+  - -1.5803654829608362
+  - 2.4885921478271484
+  - 0.7739996910095215
+  joint_velocities_rad_s:
+  - -1.2783173588104546e-05
+  - -1.2783173588104546e-05
+  - -2.3968450477696024e-05
+  - -2.3968450477696024e-05
+  - 2.3968450477696024e-05
+  - 1.2783173588104546e-05
+  joint_state_stamp_sec: 1784909850.3785882
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.2441402959779118
+      y: -0.3914434588510691
+      z: 0.46732766303530177
+    quaternion_xyzw:
+      x: 0.9956855333709007
+      y: -0.06998617020111847
+      z: -0.04844402874771254
+      w: 0.036951734670727654
+    stamp_sec: 1784909850.3466845
+  note: ''
+  id: 10
+- recorded_at_utc: '2026-07-24T16:18:35.581527+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.7021058241473597
+  - 1.637021541595459
+  - -1.5982163588153284
+  - -1.7735803763019007
+  - 2.9217758178710938
+  - 0.971771240234375
+  joint_velocities_rad_s:
+  - 0.0
+  - -0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  joint_state_stamp_sec: 1784909915.5785959
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.1694154019822005
+      y: -0.4139122606069027
+      z: 0.4632736696684497
+    quaternion_xyzw:
+      x: 0.9747488900836533
+      y: -0.18980154441987154
+      z: -0.11764292467311181
+      w: -0.00034247755296151696
+    stamp_sec: 1784909915.530599
+  note: ''
+  id: 11
+- recorded_at_utc: '2026-07-24T16:18:57.825394+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.6196559111224573
+  - 1.664137363433838
+  - -1.585848633443014
+  - -1.8887069861041468
+  - 3.205808639526367
+  - 1.040336012840271
+  joint_velocities_rad_s:
+  - 8.948221511673182e-05
+  - -0.00012783173588104546
+  - -7.190534961409867e-05
+  - -7.190534961409867e-05
+  - 7.190534961409867e-05
+  - 3.834952076431364e-05
+  joint_state_stamp_sec: 1784909937.8185835
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.16163599938699239
+      y: -0.44221397370833054
+      z: 0.41422256855520695
+    quaternion_xyzw:
+      x: 0.9442556471096393
+      y: -0.2844929324068265
+      z: -0.1574293415576371
+      w: -0.05158533443576993
+    stamp_sec: 1784909937.8185835
+  note: ''
+  id: 12
+- recorded_at_utc: '2026-07-24T16:19:37.585414+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.678952995930807
+  - 1.7508902549743652
+  - -1.5477870146380823
+  - -1.6337750593768519
+  - 3.6315865516662598
+  - 0.8870577216148376
+  joint_velocities_rad_s:
+  - 0.0
+  - -0.0
+  - 2.3968450477696024e-05
+  - 0.0
+  - 0.0
+  - 0.0
+  joint_state_stamp_sec: 1784909977.5787718
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.19138084197347638
+      y: -0.4006175382526784
+      z: 0.39135986031573267
+    quaternion_xyzw:
+      x: 0.8331979072170174
+      y: -0.5496344926339289
+      z: -0.03364996134866382
+      w: -0.050505960217180026
+    stamp_sec: 1784909977.5787718
+  note: ''
+  id: 13
+- recorded_at_utc: '2026-07-24T16:19:58.742197+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.6312444845782679
+  - 1.6921539306640625
+  - -1.4121549765216272
+  - -1.639181915913717
+  - 4.146164894104004
+  - 0.967207133769989
+  joint_velocities_rad_s:
+  - 0.0
+  - -0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  joint_state_stamp_sec: 1784909998.7386858
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.16405827157788705
+      y: -0.4213601446298729
+      z: 0.3873410826550001
+    quaternion_xyzw:
+      x: -0.6929948150514239
+      y: 0.711461566323898
+      z: 0.061876105481130025
+      w: 0.09875208112377457
+    stamp_sec: 1784909998.6906905
+  note: ''
+  id: 14
+- recorded_at_utc: '2026-07-24T16:20:57.741926+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.7843282858477991
+  - 1.750218391418457
+  - -1.3115666548358362
+  - -1.5010107199298304
+  - 4.921714782714844
+  - 0.9167172312736511
+  joint_velocities_rad_s:
+  - 0.0
+  - 2.5566347176209092e-05
+  - 0.0
+  - -2.3968450477696024e-05
+  - 0.0
+  - 0.0
+  joint_state_stamp_sec: 1784910057.7387254
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.1370605394755705
+      y: -0.3682534782002898
+      z: 0.4151279598683105
+    quaternion_xyzw:
+      x: -0.3412917553462433
+      y: 0.9328597591318077
+      z: 0.03643064240797198
+      w: 0.10938654313473996
+    stamp_sec: 1784910057.7147346
+  note: ''
+  id: 16
+- recorded_at_utc: '2026-07-24T16:21:37.065903+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.5969236532794397
+  - 1.7414979934692383
+  - -1.4966519514666956
+  - -1.3287566343890589
+  - 5.32029914855957
+  - 0.9415252804756165
+  joint_velocities_rad_s:
+  - 2.5566347176209092e-05
+  - -0.0
+  - 4.793690095539205e-05
+  - -4.793690095539205e-05
+  - 9.58738019107841e-05
+  - 2.5566347176209092e-05
+  joint_state_stamp_sec: 1784910097.0586886
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.16092292956982346
+      y: -0.4413128360578107
+      z: 0.3572365619018424
+    quaternion_xyzw:
+      x: -0.15324838073810412
+      y: 0.9756963539217404
+      z: -0.005140844119629894
+      w: 0.15654114624183815
+    stamp_sec: 1784910097.026727
+  note: ''
+  id: 17
+- recorded_at_utc: '2026-07-24T16:22:05.357407+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.6337273756610315
+  - 1.701880931854248
+  - -1.5329507032977503
+  - -1.2602089087115687
+  - 5.74757194519043
+  - 0.879906177520752
+  joint_velocities_rad_s:
+  - 0.0
+  - -1.2783173588104546e-05
+  - 2.3968450477696024e-05
+  - -4.793690095539205e-05
+  - 2.3968450477696024e-05
+  - 0.0
+  joint_state_stamp_sec: 1784910125.354721
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.18256117542134961
+      y: -0.432893803158792
+      z: 0.39684556491533757
+    quaternion_xyzw:
+      x: 0.08260728232816614
+      y: 0.9842022184464091
+      z: -0.04217621214703304
+      w: 0.15080847867560354
+    stamp_sec: 1784910125.3066797
+  note: ''
+  id: 18
+- recorded_at_utc: '2026-07-24T16:22:41.367639+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.640960995350973
+  - 1.7431416511535645
+  - -1.7910597960101526
+  - -1.5447943846331995
+  - 6.137263774871826
+  - 1.3168896436691284
+  joint_velocities_rad_s:
+  - 2.5566347176209092e-05
+  - 2.5566347176209092e-05
+  - 2.3968450477696024e-05
+  - -2.3968450477696024e-05
+  - 0.0
+  - -1.2783173588104546e-05
+  joint_state_stamp_sec: 1784910161.3626022
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.007614472799269079
+      y: -0.4770840094979535
+      z: 0.4011471512712513
+    quaternion_xyzw:
+      x: 0.04990706777792191
+      y: 0.996969091434794
+      z: -0.05941780571595811
+      w: -0.0056071091831675895
+    stamp_sec: 1784910161.3146093
+  note: ''
+  id: 19
+- recorded_at_utc: '2026-07-24T16:23:25.038145+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.8954985777484339
+  - 1.8896875381469727
+  - -1.4654343763934534
+  - -1.534868065510885
+  - 4.786081314086914
+  - 1.1651146411895752
+  joint_velocities_rad_s:
+  - 0.0
+  - -0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  joint_state_stamp_sec: 1784910205.0346944
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.03166253319476678
+      y: -0.35906558084652257
+      z: 0.4014320730059208
+    quaternion_xyzw:
+      x: -0.5189157654133099
+      y: 0.8533251684689046
+      z: 0.019869489277411848
+      w: 0.04655951738247771
+    stamp_sec: 1784910204.9948368
+  note: ''
+  id: 20
+- recorded_at_utc: '2026-07-24T16:23:48.575934+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.706628147755758
+  - 1.7615056037902832
+  - -1.5221055189715784
+  - -1.7649129072772425
+  - 3.5024025440216064
+  - 0.9493472576141357
+  joint_velocities_rad_s:
+  - -3.834952076431364e-05
+  - -0.0
+  - -9.58738019107841e-05
+  - 9.58738019107841e-05
+  - -4.793690095539205e-05
+  - -3.834952076431364e-05
+  joint_state_stamp_sec: 1784910228.5706785
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.1679222097442981
+      y: -0.3958939328716313
+      z: 0.39739217276151156
+    quaternion_xyzw:
+      x: 0.8792119184150442
+      y: -0.4622043806387302
+      z: -0.09620474767895276
+      w: -0.06401686933406416
+    stamp_sec: 1784910228.5706785
+  note: ''
+  id: 21
+- recorded_at_utc: '2026-07-24T16:24:34.700505+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.4305670897113245
+  - 1.6074728965759277
+  - -1.8158324400531214
+  - -1.5080602804767054
+  - 2.115349531173706
+  - 0.8682507276535034
+  joint_velocities_rad_s:
+  - 1.2783173588104546e-05
+  - -0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - -1.2783173588104546e-05
+  joint_state_stamp_sec: 1784910274.6986094
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.2639356681916044
+      y: -0.49067373428324984
+      z: 0.3639941387296726
+    quaternion_xyzw:
+      x: 0.985289068134299
+      y: 0.1655662400778663
+      z: -0.009922223852462653
+      w: 0.04116821389548851
+    stamp_sec: 1784910274.6587422
+  note: ''
+  id: 22
+- recorded_at_utc: '2026-07-24T16:25:17.907309+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.209060017262594
+  - 1.2112793922424316
+  - -1.5574939886676233
+  - -1.5309956709491175
+  - 1.380832552909851
+  - 1.0426121950149536
+  joint_velocities_rad_s:
+  - 3.834952076431364e-05
+  - 5.1132694352418184e-05
+  - 4.793690095539205e-05
+  - -2.3968450477696024e-05
+  - 7.190534961409867e-05
+  - 0.0
+  joint_state_stamp_sec: 1784910317.9066184
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.22234216814042354
+      y: -0.6063180105674851
+      z: 0.4006355157140871
+    quaternion_xyzw:
+      x: 0.8146994417802287
+      y: 0.5796869815662892
+      z: 0.012202842583828958
+      w: 0.008883332619163726
+    stamp_sec: 1784910317.8906832
+  note: ''
+  id: 23
+- recorded_at_utc: '2026-07-24T16:25:41.846648+00:00'
+  joint_names:
+  - shoulder_lift_joint
+  - elbow_joint
+  - wrist_1_joint
+  - wrist_2_joint
+  - wrist_3_joint
+  - shoulder_pan_joint
+  joint_positions_rad:
+  - -1.6130459944354456
+  - 1.2832765579223633
+  - -1.4380515257464808
+  - -1.762359921132223
+  - 0.9330243468284607
+  - 1.3577464818954468
+  joint_velocities_rad_s:
+  - 5.1132694352418184e-05
+  - 3.834952076431364e-05
+  - 0.0
+  - 4.793690095539205e-05
+  - 4.793690095539205e-05
+  - -1.2783173588104546e-05
+  joint_state_stamp_sec: 1784910341.8426163
+  base_frame: base
+  tool_frame: tool0
+  T_base_tool:
+    translation_m:
+      x: -0.0055628883791932204
+      y: -0.4715015216178329
+      z: 0.5789539803648632
+    quaternion_xyzw:
+      x: 0.5440690234624996
+      y: 0.8269741313309941
+      z: -0.12797940437802502
+      w: -0.061024223657131844
+    stamp_sec: 1784910341.80267
+  note: ''
+  id: 24
