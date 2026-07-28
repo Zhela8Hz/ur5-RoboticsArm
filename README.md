@@ -22,6 +22,16 @@
 - `configs/robot/`：机器人相关配置。
 - `docs/`：操作记录和说明文档。
 
+## 自动手眼标定
+
+UR5 + Gemini335 的自动采集脚本、24 位姿轨迹和默认外参位于
+`calibration/extrinsics/handeye/`。完整的环境要求、非运动检查、真实机械臂采集、
+离线求解和验证步骤见 [docs/AUTO_HANDEYE_CAPTURE.md](docs/AUTO_HANDEYE_CAPTURE.md)。
+
+当前默认外参为 `calibration/extrinsics/handeye/handeye_tool0_camera_color_optical.yaml`，
+由 24 样本 Park 方法求得，固定板位移一致性均值为 0.669 mm。自动采集会驱动真实 UR5，
+必须先确认工位无碰撞并在示教器运行 External Control。
+
 ## 常用入口
 
 以下命令默认从仓库根目录执行。
