@@ -16,11 +16,16 @@ Current status
 
 当前有效的 `RGB eye-in-hand` 外参结果是：
 
-  calibration/extrinsics/handeye/sessions/20260630_195009/handeye_result.yaml
+  calibration/extrinsics/handeye/handeye_tool0_camera_color_optical.yaml
 
-当前 `latest` session 指向：
+来源：
 
-  calibration/extrinsics/handeye/sessions/20260630_195009
+  robotic-arm-lab-vla/calibration/gemini335/handeye_tool0_camera_color_optical.yaml
+
+说明：
+
+  `calibration/extrinsics/handeye/sessions/20260630_195009` 是 DaBai / 旧安装状态历史结果，
+  不再作为默认 `T_tool_camera` 使用。
 
 当前离线状态：
 
@@ -28,7 +33,7 @@ Current status
 
 在线验证状态：
 
-  Pending。正式用于机器人操作前，应运行：
+  New bracket live validation passed in the source record. 在本机正式用于机器人操作前，应运行：
 
   calibration/extrinsics/handeye/scripts/start_handeye_live_validate.sh
 
@@ -36,11 +41,16 @@ English:
 
 The current active `RGB eye-in-hand` extrinsic result is:
 
-  calibration/extrinsics/handeye/sessions/20260630_195009/handeye_result.yaml
+  calibration/extrinsics/handeye/handeye_tool0_camera_color_optical.yaml
 
-The current `latest` session resolves to:
+Source:
 
-  calibration/extrinsics/handeye/sessions/20260630_195009
+  robotic-arm-lab-vla/calibration/gemini335/handeye_tool0_camera_color_optical.yaml
+
+Note:
+
+  `calibration/extrinsics/handeye/sessions/20260630_195009` is a historical DaBai /
+  old mounting result and is no longer the default `T_tool_camera`.
 
 Current offline status:
 
@@ -48,7 +58,8 @@ Current offline status:
 
 Live validation status:
 
-  Pending. Before using the result for robot operation, run:
+  New bracket live validation passed in the source record. Before using the result
+  for robot operation on this computer, run:
 
   calibration/extrinsics/handeye/scripts/start_handeye_live_validate.sh
 
@@ -58,45 +69,45 @@ Current board and camera setup
 
 中文：
 
-当前实际使用的是小 `ChArUco` 板：
+当前默认使用的是大 `ChArUco` 板：
 
   squares: 6x6
-  square_length_m: 0.025
-  marker_length_m: 0.018
+  square_length_m: 0.040
+  marker_length_m: 0.030
   dictionary: DICT_6X6_1000
   start_id: 233
 
 当前 `RGB` 图像模式：
 
-  640x360 @ 10 fps
+  1920x1080 @ 30 fps
 
-曾经记录过大板参数：
+旧 DaBai / 小板历史参数为：
 
-  square_length_m: 0.040
-  marker_length_m: 0.030
+  square_length_m: 0.025
+  marker_length_m: 0.018
 
-只有实际换回大板时，脚本参数才应切到 `0.040 / 0.030`。板子尺寸用错会导致 `rotation` 看起来正常，但 `translation` 出现厘米级误差。
+只有实际换回小板或复查旧 session 时，脚本参数才应切到 `0.025 / 0.018`。板子尺寸用错会导致 `rotation` 看起来正常，但 `translation` 出现厘米级误差。
 
 English:
 
-The physical board currently in use is the small `ChArUco` board:
+The default physical board is now the large `ChArUco` board:
 
   squares: 6x6
-  square_length_m: 0.025
-  marker_length_m: 0.018
+  square_length_m: 0.040
+  marker_length_m: 0.030
   dictionary: DICT_6X6_1000
   start_id: 233
 
 Current `RGB` image mode:
 
-  640x360 @ 10 fps
+  1920x1080 @ 30 fps
 
-A larger board was recorded previously:
+The old DaBai / small-board historical parameters are:
 
-  square_length_m: 0.040
-  marker_length_m: 0.030
+  square_length_m: 0.025
+  marker_length_m: 0.018
 
-Use `0.040 / 0.030` only when that larger board is physically used. A wrong board size can make `rotation` look good while `translation` fails at centimeter scale.
+Use `0.025 / 0.018` only when switching back to the small board or reviewing old sessions. A wrong board size can make `rotation` look good while `translation` fails at centimeter scale.
 
 
 Current active result
@@ -106,19 +117,19 @@ Current active result
 
 Session：
 
-  calibration/extrinsics/handeye/sessions/20260630_195009
+  external source session 20260719_141204
 
 单独结果报告：
 
-  calibration/extrinsics/handeye/sessions/20260630_195009/handeye_calibration_result_small_board.txt
+  robotic-arm-lab-vla/calibration/gemini335/handeye_session_20260719_141204_summary.md
 
 Result YAML：
 
-  calibration/extrinsics/handeye/sessions/20260630_195009/handeye_result.yaml
+  calibration/extrinsics/handeye/handeye_tool0_camera_color_optical.yaml
 
 Validation CSV：
 
-  calibration/extrinsics/handeye/sessions/20260630_195009/base_target_validation.csv
+  Not copied into this repository. Source summary reports online RTDE live validation.
 
 标定类型：
 
@@ -126,7 +137,7 @@ Validation CSV：
 
 Method：
 
-  Tsai
+  Daniilidis
 
 Transform：
 
@@ -136,48 +147,49 @@ Transform：
 
 `tool0` frame 下的 translation：
 
-  x = -0.0984539028 m = -98.45 mm
-  y =  0.0039007693 m =   3.90 mm
-  z =  0.0854959288 m =  85.50 mm
+  x = -0.1036245277 m = -103.62 mm
+  y = -0.0101101606 m =  -10.11 mm
+  z =  0.0865760371 m =   86.58 mm
 
 Homogeneous matrix `T_tool_camera`：
 
-  -0.001510532   0.999998761   0.000442227  -0.098453903
-  -0.999973995  -0.001513613   0.007051086   0.003900769
-   0.007051746  -0.000431565   0.999975043   0.085495929
+   0.008140661  -0.853384425   0.521218527  -0.103624528
+   0.999769910   0.017290676   0.012694879  -0.010110161
+  -0.019845832   0.520995255   0.853328827   0.086576037
    0.000000000   0.000000000   0.000000000   1.000000000
 
 Offline fixed-board consistency：
 
-  translation_m_mean = 0.001361724 m = 1.36 mm
-  translation_m_max  = 0.003044513 m = 3.04 mm
-  rotation_deg_mean  = 0.288144 deg
-  rotation_deg_max   = 0.689497 deg
+  translation_m_mean = 0.001051101 m = 1.05 mm
+  translation_m_max  = 0.001668065 m = 1.67 mm
+  rotation_deg_mean  = 0.118467 deg
+  rotation_deg_max   = 0.261194 deg
 
-CSV scatter around mean fixed board pose：
+Online RTDE live validation scatter：
 
-  translation mean = 1.04 mm
-  translation max  = 3.04 mm
-  rotation mean    = 0.276619 deg
-  rotation max     = 0.689497 deg
+  validation samples = 6
+  translation mean   = 0.83 mm
+  translation max    = 1.53 mm
+  rotation mean      = 0.24 deg
+  rotation max       = 0.43 deg
 
 English:
 
 Session:
 
-  calibration/extrinsics/handeye/sessions/20260630_195009
+  external source session 20260719_141204
 
 Standalone result report:
 
-  calibration/extrinsics/handeye/sessions/20260630_195009/handeye_calibration_result_small_board.txt
+  robotic-arm-lab-vla/calibration/gemini335/handeye_session_20260719_141204_summary.md
 
 Result YAML:
 
-  calibration/extrinsics/handeye/sessions/20260630_195009/handeye_result.yaml
+  calibration/extrinsics/handeye/handeye_tool0_camera_color_optical.yaml
 
 Validation CSV:
 
-  calibration/extrinsics/handeye/sessions/20260630_195009/base_target_validation.csv
+  Not copied into this repository. Source summary reports online RTDE live validation.
 
 Calibration type:
 
@@ -185,7 +197,7 @@ Calibration type:
 
 Method:
 
-  Tsai
+  Daniilidis
 
 Transform:
 
@@ -195,30 +207,166 @@ Transform:
 
 Translation in the `tool0` frame:
 
-  x = -0.0984539028 m = -98.45 mm
-  y =  0.0039007693 m =   3.90 mm
-  z =  0.0854959288 m =  85.50 mm
+  x = -0.1036245277 m = -103.62 mm
+  y = -0.0101101606 m =  -10.11 mm
+  z =  0.0865760371 m =   86.58 mm
 
 Homogeneous matrix `T_tool_camera`:
 
-  -0.001510532   0.999998761   0.000442227  -0.098453903
-  -0.999973995  -0.001513613   0.007051086   0.003900769
-   0.007051746  -0.000431565   0.999975043   0.085495929
+   0.008140661  -0.853384425   0.521218527  -0.103624528
+   0.999769910   0.017290676   0.012694879  -0.010110161
+  -0.019845832   0.520995255   0.853328827   0.086576037
    0.000000000   0.000000000   0.000000000   1.000000000
 
 Offline fixed-board consistency:
 
-  translation_m_mean = 0.001361724 m = 1.36 mm
-  translation_m_max  = 0.003044513 m = 3.04 mm
-  rotation_deg_mean  = 0.288144 deg
-  rotation_deg_max   = 0.689497 deg
+  translation_m_mean = 0.001051101 m = 1.05 mm
+  translation_m_max  = 0.001668065 m = 1.67 mm
+  rotation_deg_mean  = 0.118467 deg
+  rotation_deg_max   = 0.261194 deg
 
-CSV scatter around the mean fixed-board pose:
+Online RTDE live validation scatter:
 
-  translation mean = 1.04 mm
-  translation max  = 3.04 mm
-  rotation mean    = 0.276619 deg
-  rotation max     = 0.689497 deg
+  validation samples = 6
+  translation mean   = 0.83 mm
+  translation max    = 1.53 mm
+  rotation mean      = 0.24 deg
+  rotation max       = 0.43 deg
+
+
+2026-07-22 default hand-eye program switch
+------------------------------------------
+
+中文：
+
+1. 将当前项目默认 `RGB eye-in-hand` 结果切换为 Gemini335 新转接件结果：
+
+   calibration/extrinsics/handeye/handeye_tool0_camera_color_optical.yaml
+
+2. 该文件来自：
+
+   robotic-arm-lab-vla/calibration/gemini335/handeye_tool0_camera_color_optical.yaml
+
+3. 默认 `ChArUco` 参数切换为大板：
+
+   squares: 6x6
+   square_length_m: 0.040
+   marker_length_m: 0.030
+   dictionary: DICT_6X6_1000
+   start_id: 233
+
+4. 默认求解方法切换为 `Daniilidis`。旧 DaBai / 小板 `Tsai` 结果和历史 session 保留，但不再作为默认程序入口使用。
+
+5. 本次没有连接真实设备，没有执行机器人运动，没有使用 `sudo`，没有执行 Git 写操作。
+
+English:
+
+1. Switched the current project's default `RGB eye-in-hand` result to the Gemini335 new-bracket result:
+
+   calibration/extrinsics/handeye/handeye_tool0_camera_color_optical.yaml
+
+2. The file was sourced from:
+
+   robotic-arm-lab-vla/calibration/gemini335/handeye_tool0_camera_color_optical.yaml
+
+3. Default `ChArUco` parameters now use the large board:
+
+   squares: 6x6
+   square_length_m: 0.040
+   marker_length_m: 0.030
+   dictionary: DICT_6X6_1000
+   start_id: 233
+
+4. The default solve method is now `Daniilidis`. The old DaBai / small-board `Tsai` result and historical sessions are preserved, but they are no longer used as default program entries.
+
+5. This update did not connect real hardware, execute robot motion, use `sudo`, or run Git write operations.
+
+
+2026-07-22 Ceres drift correction prototype
+-------------------------------------------
+
+中文：
+
+1. 新增 C++ / Ceres 漂移修正原型：
+
+   calibration/extrinsics/handeye/tools/optimize_handeye_drift_ceres.cpp
+   calibration/extrinsics/handeye/tools/CMakeLists.txt
+
+2. `handeye_live_validate.py` 已扩展记录：
+
+   T_base_tool
+   T_camera_target
+   drift_xyz_m
+   drift_rpy_deg
+
+   这些字段用于离线 Ceres 优化，不改变真实 `handeye` YAML。
+
+3. `start_handeye_live_validate.sh` 支持环境变量：
+
+   HANDEYE_DRIFT_X_M
+   HANDEYE_DRIFT_Y_M
+   HANDEYE_DRIFT_Z_M
+   HANDEYE_DRIFT_ROLL_DEG
+   HANDEYE_DRIFT_PITCH_DEG
+   HANDEYE_DRIFT_YAW_DEG
+   HANDEYE_LIVE_OUTPUT
+
+4. Ceres 优化目标：
+
+   对每个样本计算
+
+     T_base_board_i =
+       T_base_tool_i * T_tool_camera * T_applied_drift * T_correction * T_camera_target_i
+
+   让所有 `T_base_board_i` 尽量一致，同时估计 `T_correction`。
+
+5. 本机检查结果：
+
+   `cmake`、`g++`、Eigen 可用；未发现 Ceres 开发包，`cmake` 报错缺少
+   `CeresConfig.cmake`。没有执行 `sudo` 安装。
+
+English:
+
+1. Added a C++ / Ceres drift-correction prototype:
+
+   calibration/extrinsics/handeye/tools/optimize_handeye_drift_ceres.cpp
+   calibration/extrinsics/handeye/tools/CMakeLists.txt
+
+2. `handeye_live_validate.py` now records:
+
+   T_base_tool
+   T_camera_target
+   drift_xyz_m
+   drift_rpy_deg
+
+   These fields support offline Ceres optimization and do not modify the real
+   `handeye` YAML.
+
+3. `start_handeye_live_validate.sh` supports these environment variables:
+
+   HANDEYE_DRIFT_X_M
+   HANDEYE_DRIFT_Y_M
+   HANDEYE_DRIFT_Z_M
+   HANDEYE_DRIFT_ROLL_DEG
+   HANDEYE_DRIFT_PITCH_DEG
+   HANDEYE_DRIFT_YAW_DEG
+   HANDEYE_LIVE_OUTPUT
+
+4. Ceres objective:
+
+   For each sample, compute
+
+     T_base_board_i =
+       T_base_tool_i * T_tool_camera * T_applied_drift * T_correction * T_camera_target_i
+
+   and make all `T_base_board_i` as consistent as possible while estimating
+   `T_correction`.
+
+5. Local check result:
+
+   `cmake`, `g++`, and Eigen are available. The Ceres development package was
+   not found, and `cmake` failed because `CeresConfig.cmake` is missing. No
+   `sudo` installation was executed.
 
 
 2026-06-30 work progress
@@ -1065,3 +1213,761 @@ Current conclusion:
 
   No robot motion command was executed. No sudo was used. No Git write
   operation was performed.
+
+================================================================================
+2026-07-07 GitHub backup and documentation update
+================================================================================
+
+中文：
+
+目标：
+
+  将今天 Gemini335 相关代码、脚本、配置、日志和说明文档备份到 GitHub，
+  并与 DaBai 相机时期的内容区分。
+
+GitHub 远端核对：
+
+  远端仓库：
+
+    https://github.com/Zhela8Hz/ur5-RoboticsArm
+
+  通过只读命令核对远端引用：
+
+    git ls-remote --symref origin HEAD
+    git ls-remote origin
+
+  结果显示，GitHub 远端默认 HEAD 当前指向：
+
+    refs/heads/calibration_gemini335
+    commit 986ab9f060d769d6e9016218871e410f80d21b34
+
+  远端当前可见分支包括：
+
+    calibration_gemini335 -> 986ab9f060d769d6e9016218871e410f80d21b34
+    calibration_dabai     -> 1f1a32101caba9c346c4da17b923e5ef1d27e63f
+    old-main-backup       -> 1f1a32101caba9c346c4da17b923e5ef1d27e63f
+    organize-calibration-layout -> 6bbc92ecb217d917375629431eead073ca942324
+
+  结论：
+
+    GitHub 远端默认打开的分支已经是 `calibration_gemini335`，对应今天
+    Gemini335 的最新备份提交 `986ab9f`。远端还保留了 DaBai / 旧 main
+    内容对应的 `calibration_dabai` 和 `old-main-backup` 分支。远端
+    `git ls-remote` 未返回 `refs/heads/main`，因此本次记录以远端
+    HEAD 和实际分支引用为准。
+
+本地 / 远端提交：
+
+  Gemini335 分支的最新两个提交为：
+
+    986ab9f Add Gemini335 setup guide
+    0ac754a Add Gemini335 calibration workflow
+
+README 更新：
+
+  `README.md` 已更新为 Gemini335 当前状态说明，主要包括：
+
+    - 当前目标是 UR5 + Orbbec Gemini335 的相机内参、RTDE 位姿读取和
+      手眼标定路径验证；
+    - 当前 Gemini335 RGB 内参文件位置：
+      `calibration/rgb_intrinsics/results/rgb_intrinsics_gemini335_1920x1080.yaml`；
+    - 已验证 Gemini335 图像、ChArUco 检测、`ur_rtde` 读取 UR5 pose /
+      joints、单帧 `T_base_tool` + `T_camera_target` 采集流程；
+    - DaBai 相机时代的手眼结果只作为历史归档，不能直接用于 Gemini335；
+    - 常用入口命令改为默认从仓库根目录执行；
+    - 增加 `calibration_dabai` 和 `calibration_gemini335` 的分支用途说明。
+
+新增环境配置文档：
+
+  新增：
+
+    docs/SETUP_GEMINI335.md
+
+  内容包括：
+
+    - 从 GitHub 克隆 `calibration_gemini335` 后需要补齐的系统环境；
+    - ROS2 Humble、Orbbec camera、UR driver、`ur_rtde`、OpenCV/ChArUco
+      等依赖；
+    - UR5 机器人 IP `192.168.1.10` 和本机 Host IP `192.168.1.20`；
+    - 相机、RTDE、UR driver 的推荐验证顺序；
+    - 当前仓库没有包含 `ros2_ws/`，因此不是一键可运行环境；
+    - Gemini335 固定件尚未完成，正式多姿态手眼标定结果尚未生成。
+
+本段操作说明：
+
+  本段只记录 GitHub 备份和文档整理结果。没有执行机器人运动，没有使用
+  sudo。Git 写操作由用户在终端中完成，Codex 只提供命令和说明。
+
+English:
+
+Goal:
+
+  Back up today's Gemini335-related code, scripts, configuration, logs, and
+  documentation to GitHub while keeping it separate from the earlier DaBai
+  camera work.
+
+GitHub remote verification:
+
+  Remote repository:
+
+    https://github.com/Zhela8Hz/ur5-RoboticsArm
+
+  Read-only remote checks were run with:
+
+    git ls-remote --symref origin HEAD
+    git ls-remote origin
+
+  The remote default HEAD currently points to:
+
+    refs/heads/calibration_gemini335
+    commit 986ab9f060d769d6e9016218871e410f80d21b34
+
+  Visible remote branches include:
+
+    calibration_gemini335 -> 986ab9f060d769d6e9016218871e410f80d21b34
+    calibration_dabai     -> 1f1a32101caba9c346c4da17b923e5ef1d27e63f
+    old-main-backup       -> 1f1a32101caba9c346c4da17b923e5ef1d27e63f
+    organize-calibration-layout -> 6bbc92ecb217d917375629431eead073ca942324
+
+  Conclusion:
+
+    The GitHub remote default branch now opens at `calibration_gemini335`,
+    which contains today's latest Gemini335 backup commit `986ab9f`. The
+    DaBai / old-main content is still preserved in `calibration_dabai` and
+    `old-main-backup`. `git ls-remote` did not return `refs/heads/main`, so
+    this log records the actual remote HEAD and branch refs observed.
+
+Local / remote commits:
+
+  The latest Gemini335 branch commits are:
+
+    986ab9f Add Gemini335 setup guide
+    0ac754a Add Gemini335 calibration workflow
+
+README update:
+
+  `README.md` was updated to describe the current Gemini335 state:
+
+    - UR5 + Orbbec Gemini335 intrinsics, RTDE pose reading, and hand-eye path
+      validation are the current focus;
+    - the current Gemini335 RGB intrinsics file is
+      `calibration/rgb_intrinsics/results/rgb_intrinsics_gemini335_1920x1080.yaml`;
+    - Gemini335 image capture, ChArUco detection, `ur_rtde` pose / joint
+      reading, and single-frame `T_base_tool` + `T_camera_target` capture were
+      verified;
+    - DaBai hand-eye results are historical only and must not be reused
+      directly for Gemini335;
+    - common commands are documented as repository-root commands;
+    - branch roles for `calibration_dabai` and `calibration_gemini335` were
+      documented.
+
+New setup document:
+
+  Added:
+
+    docs/SETUP_GEMINI335.md
+
+  It documents:
+
+    - required environment after cloning `calibration_gemini335`;
+    - ROS2 Humble, Orbbec camera, UR driver, `ur_rtde`, OpenCV/ChArUco
+      dependencies;
+    - UR5 robot IP `192.168.1.10` and computer Host IP `192.168.1.20`;
+    - recommended camera, RTDE, and UR driver verification order;
+    - the repository does not include `ros2_ws/`, so it is not a one-command
+      runnable environment;
+    - the Gemini335 camera mount is not finished yet, so no formal multi-pose
+      hand-eye result exists yet.
+
+Operation note:
+
+  This section only records GitHub backup and documentation updates. No robot
+  motion was executed. No sudo was used. Git write operations were performed
+  by the user in their own terminal; Codex only provided commands and
+  explanations.
+
+
+================================================================================
+2026-07-22 dynamic calibration reproduction status
+================================================================================
+
+中文：
+
+用户说明：
+
+  今天准备开始复现动态标定，因此从 GitHub 克隆了手眼标定相关程序和结果；
+  目前还没有实际跑通动态标定流程。
+
+本机核对结果：
+
+  1. 当前工作区确实存在今天引入的外部仓库目录：
+
+       robotic-arm-lab-vla/
+
+     该目录自身包含 `.git/`，并带有 Gemini335 相关标定文件、结果摘要和
+     `PROGRESS_LOG.md`。当前主仓库状态中，该目录表现为未跟踪文件：
+
+       ?? robotic-arm-lab-vla/
+
+  2. 当前项目中确实存在一个实时手眼漂移监控程序：
+
+       calibration/extrinsics/handeye/tools/handeye_realtime_drift_monitor.py
+
+     以及对应启动脚本：
+
+       calibration/extrinsics/handeye/scripts/start_handeye_realtime_monitor.sh
+
+     这两个文件当前也是未跟踪文件，说明尚未纳入当前仓库 Git 版本控制。
+
+  3. `handeye_realtime_drift_monitor.py` 的功能与“实时展现相机画面并标注
+     实时动态漂移误差检测”描述相符。程序会订阅：
+
+       /camera/color/image_raw
+
+     使用当前 Gemini335 `RGB` 内参和 `T_tool_camera`，检测大 `ChArUco`
+     板，绘制检测到的 marker / corner / 坐标轴，并在 OpenCV 窗口中叠加：
+
+       status
+       corners
+       drift xyz m
+       drift rpy deg
+       delta xyz mm
+       delta norm mm
+       delta rot deg
+       history trans mean/max mm
+       history rot mean/max deg
+
+  4. 该程序从 TF 查询：
+
+       base -> tool0
+
+     并计算：
+
+       T_base_tool * T_tool_camera * T_drift * T_camera_target
+
+     用第一帧作为 reference pose，后续帧显示相对 reference pose 的位置和
+     旋转变化。因此它适合用于固定板场景下观察手眼外参漂移或人为注入
+     drift 后的实时误差趋势。
+
+当前未验证事项：
+
+  1. 尚未确认该实时监控程序已经在真实 ROS2 / Gemini335 / UR5 环境中成功启动。
+  2. 尚未确认动态标定复现流程已经完整跑通。
+  3. 尚未确认 `Ceres` 版本的漂移修正原型已完成依赖安装并可运行。
+
+本段操作说明：
+
+  本段只记录用户说明和只读核对结果。没有连接真实设备，没有执行机器人运动，
+  没有使用 `sudo`，没有执行 Git 写操作。
+
+English:
+
+User note:
+
+  The user plans to start reproducing dynamic calibration today, and therefore
+  cloned hand-eye calibration programs and results from GitHub. The dynamic
+  calibration workflow has not been successfully run yet.
+
+Local verification:
+
+  1. The current workspace does contain an external repository directory added
+     today:
+
+       robotic-arm-lab-vla/
+
+     This directory has its own `.git/` and contains Gemini335 calibration
+     files, result summaries, and `PROGRESS_LOG.md`. In the main repository
+     status, it appears as an untracked path:
+
+       ?? robotic-arm-lab-vla/
+
+  2. The current project does contain a realtime hand-eye drift monitor:
+
+       calibration/extrinsics/handeye/tools/handeye_realtime_drift_monitor.py
+
+     and its launcher:
+
+       calibration/extrinsics/handeye/scripts/start_handeye_realtime_monitor.sh
+
+     Both files are currently untracked in the main repository, so they have
+     not been added to Git version control here.
+
+  3. `handeye_realtime_drift_monitor.py` matches the description of showing
+     the camera image in realtime and overlaying dynamic drift-error
+     diagnostics. It subscribes to:
+
+       /camera/color/image_raw
+
+     uses the current Gemini335 `RGB` intrinsics and `T_tool_camera`, detects
+     the large `ChArUco` board, draws detected markers / corners / axes, and
+     overlays these values in an OpenCV window:
+
+       status
+       corners
+       drift xyz m
+       drift rpy deg
+       delta xyz mm
+       delta norm mm
+       delta rot deg
+       history trans mean/max mm
+       history rot mean/max deg
+
+  4. The program queries TF:
+
+       base -> tool0
+
+     and computes:
+
+       T_base_tool * T_tool_camera * T_drift * T_camera_target
+
+     It uses the first valid frame as the reference pose, then displays
+     translation and rotation changes relative to that reference pose. This is
+     suitable for observing hand-eye extrinsic drift or injected drift trends
+     in a fixed-board scene.
+
+Items not yet verified:
+
+  1. It has not been confirmed that the realtime monitor has successfully run
+     in the real ROS2 / Gemini335 / UR5 environment.
+  2. It has not been confirmed that the full dynamic calibration reproduction
+     workflow has run successfully.
+  3. It has not been confirmed that the `Ceres` drift-correction prototype has
+     all dependencies installed and can run.
+
+Operation note:
+
+  This section only records the user note and read-only verification results.
+  No real hardware was connected, no robot motion was executed, no `sudo` was
+  used, and no Git write operation was performed.
+
+
+================================================================================
+2026-07-23 hand-eye drift injection and Ceres correction advisor update
+================================================================================
+
+中文：
+
+今天主要完善了两套相互隔离的手眼外参漂移相关程序。
+
+分日志：
+
+  docs/HANDEYE_20260723_CERES_DRIFT_INJECTION_LOG.md
+
+完成内容概要：
+
+  1. 实时漂移检测程序继续作为独立工具使用：
+
+       calibration/extrinsics/handeye/tools/handeye_realtime_drift_monitor.py
+       calibration/extrinsics/handeye/scripts/start_handeye_realtime_monitor.sh
+
+     该程序用于实时显示相机画面、检测固定 ChArUco 板，并对比原始手眼外参
+     和软件注入漂移后的手眼外参所计算出的标定板位姿误差。
+
+  2. 独立 Ceres 修正建议程序继续作为另一套独立窗口程序使用：
+
+       calibration/extrinsics/handeye/tools/handeye_ceres_correction_monitor.py
+       calibration/extrinsics/handeye/tools/optimize_handeye_correction_ceres.cpp
+       calibration/extrinsics/handeye/scripts/start_handeye_ceres_correction_monitor.sh
+
+     该程序自主判断机械臂静止状态，只采集静止且 ChArUco 检测成功的数据组，
+     每新增 5 组数据后分别输出当前 5 组结果和累计结果。
+
+  3. 在 Ceres 修正建议程序中新增了临时软件漂移注入功能。该功能只影响
+     Ceres 优化所使用的初始手眼外参，不修改原始 handeye YAML，不更新 ROS TF，
+     不自动应用修正量。
+
+  4. 两个程序均支持通过环境变量设置漂移参数：
+
+       HANDEYE_ENABLE_DRIFT_INJECTION
+       HANDEYE_DRIFT_X_M / HANDEYE_DRIFT_Y_M / HANDEYE_DRIFT_Z_M
+       HANDEYE_DRIFT_RX_DEG / HANDEYE_DRIFT_RY_DEG / HANDEYE_DRIFT_RZ_DEG
+
+  5. 明确了使用方式：
+
+       实时漂移检测程序用于观察 original 与 drifted 的误差趋势；
+       Ceres 修正建议程序用于在注入已知错误外参后，观察 Ceres 是否估计出
+       近似反方向的建议修正量。
+
+  6. 离线验证结果：
+
+       Python 语法检查通过；
+       Bash 启动脚本语法检查通过；
+       Ceres 后端编译通过。
+
+当前未验证事项：
+
+  1. 尚未用真实采集的多姿态数据验证 Ceres 是否能恢复 X +5 mm 等已知注入误差。
+  2. 图像时间戳与机器人位姿严格同步问题暂时保留，当前默认仍使用 RTDE 作为
+     位姿来源，并依靠静止采样降低时间不同步影响。
+  3. 所有修正结果仍只是建议值，尚未应用到 ROS TF 或写回标定文件。
+
+操作说明：
+
+  本次记录过程中没有执行机器人运动，没有使用 sudo，没有执行 Git 写操作。
+
+English:
+
+Today focused on two isolated hand-eye drift-related programs.
+
+Detailed log:
+
+  docs/HANDEYE_20260723_CERES_DRIFT_INJECTION_LOG.md
+
+Summary:
+
+  1. The realtime drift monitor remains an independent tool for displaying the
+     live camera image, detecting the fixed ChArUco board, and comparing board
+     pose consistency between the original and software-drifted hand-eye
+     transforms.
+
+  2. The independent Ceres correction advisor remains a separate OpenCV-window
+     program. It accepts only static robot-pose groups with successful ChArUco
+     detection and runs both current-5-group and cumulative optimizations every
+     5 accepted groups.
+
+  3. Temporary software drift injection was added to the Ceres correction
+     advisor. It only affects the initial hand-eye transform passed to the Ceres
+     backend. It does not modify the original hand-eye YAML, update ROS TF, or
+     automatically apply any correction.
+
+  4. Both programs use environment variables for drift parameters, including
+     XYZ translation in meters and XYZ rotation in degrees.
+
+  5. The intended workflow is now clear: use the realtime monitor for original
+     versus drifted error visualization, and use the Ceres advisor to test
+     whether a known injected hand-eye error can be estimated as an opposite
+     suggested correction.
+
+Validation:
+
+  Python syntax check passed. Bash launcher syntax check passed. The Ceres
+  correction backend compiled successfully.
+
+Items not yet verified:
+
+  The real multi-pose data workflow has not yet been used to confirm that Ceres
+  recovers known injected errors such as X +5 mm. Strict image/robot timestamp
+  synchronization remains intentionally unresolved for now.
+
+Operation note:
+
+  No robot motion was executed, no sudo was used, and no Git write operation was
+  performed while recording this update.
+
+
+================================================================================
+2026-07-24 ChArUco motion image quality diagnostic
+================================================================================
+
+中文：
+
+本次新增并试运行了运动过程中 RGB 图像质量与 ChArUco 角点识别质量诊断工具：
+
+  calibration/rgb_intrinsics/tools/charuco_motion_quality.py
+
+工具用途：
+
+  1. 订阅 ROS2 图像 topic，默认 `/camera/color/image_raw`。
+  2. 对每帧计算图像清晰度、曝光质量、ChArUco 检测数量和位姿重投影误差。
+  3. 默认使用当前 Gemini335 RGB 内参：
+
+       calibration/rgb_intrinsics/results/rgb_intrinsics_gemini335_1920x1080.yaml
+
+  4. 默认使用当前 ChArUco 大板参数：
+
+       6x6 squares
+       square_length_m = 0.040
+       marker_length_m = 0.030
+       dictionary = DICT_6X6_1000
+       start_id = 233
+       min_charuco_corners = 20
+
+  5. 支持可选 `--use-tf`，用于记录 `base -> tool0` 的线速度和角速度。
+     如果未加 `--use-tf`，或 TF 不可用，则输出中的 `speed` 和 `ang` 为 `n/a`。
+
+离线验证：
+
+  1. Python 语法检查通过：
+
+       python3 -m py_compile calibration/rgb_intrinsics/tools/charuco_motion_quality.py
+
+  2. ROS2 环境下 `--help` 导入检查通过。
+  3. 短时 dry-run 通过，未接收真实图像时正常退出并生成空 CSV。
+  4. 合成 ChArUco 图检测通过：
+
+       markers = 18
+       charuco = 25
+       laplacian_var = 4625.0
+
+用户实测 CSV：
+
+  calibration/rgb_intrinsics/results/charuco_motion_quality_20260724_201232.csv
+
+用户实测 summary：
+
+  samples: 823
+  supports_corners_ratio: 1.000
+  pose_ok_ratio: 1.000
+  supports_pose_ratio: 0.668
+  charuco_corners: median=25.0 p05=22.0 p95=25.0
+  quality_score: median=100.0 p05=80.0 p95=100.0
+  laplacian_var_roi: median=1347.1 p05=958.2 p95=1674.8
+  reprojection_rmse_px: median=0.292 px p05=0.152 px p95=112.672 px
+  status_counts: BAD_RMSE=273, GOOD=548, WARN_RMSE=2
+
+进一步只读分析结果：
+
+  GOOD:
+    frames = 548 / 823 = 66.6%
+    rmse median = 0.219 px
+    rmse p95 = 0.492 px
+    charuco_corners median = 25
+
+  WARN_RMSE:
+    frames = 2 / 823 = 0.2%
+    rmse range = 1.046-1.170 px
+
+  BAD_RMSE:
+    frames = 273 / 823 = 33.2%
+    rmse median = 85.289 px
+    rmse p95 = 157.687 px
+    charuco_corners median = 25
+
+质量结论：
+
+  1. 当标定板完整入镜、几何关系正常时，运动中的图像质量很好。
+     GOOD 帧的重投影误差通常低于 0.5 px，能够支撑 ChArUco 角点识别和位姿估计。
+
+  2. 当前运动过程不是全程稳定可用。约 33.2% 帧为 BAD_RMSE，说明这些帧虽然
+     检测到了足够 ChArUco 角点，但位姿重投影误差过大，不能用于可靠位姿。
+
+  3. BAD_RMSE 成段出现，例如样本 170-193、284-329、419-451、628-651、
+     653-673、737-823。这更符合运动中标定板局部出画面、边缘视角过大、
+     marker 误检或板面不完整导致的几何失真，而不是单纯随机动态模糊。
+
+  4. 如果任务只要求“标定板在画面内时能识别角点”，本次结果很好。
+     如果任务要求“机械臂运动全过程都稳定识别角点/位姿”，当前视野覆盖率还不够。
+     建议后续在算法侧过滤 `status == GOOD` 或 `reprojection_rmse_px <= 1.0/2.0`。
+
+建议：
+
+  1. 先采集静止基线，再分别采集低速、中速、高速运动数据，对比
+     `laplacian_var_roi`、`charuco_corners`、`reprojection_rmse_px` 和 `status`。
+
+  2. 优先调整机械臂运动轨迹、相机朝向或标定板位置，保证运动期间标定板完整入镜。
+
+  3. 若需要把质量和机械臂速度关联起来，运行工具时加：
+
+       --use-tf
+
+     并确认 UR driver 正在发布 `base -> tool0` TF。
+
+操作说明：
+
+  本次记录过程中没有执行机器人运动，没有使用 sudo，没有执行 Git 写操作。
+
+
+================================================================================
+2026-07-24 realtime hand-eye drift monitor field debug, rollback, and RTDE/TF status
+================================================================================
+
+中文：
+
+本次继续排查实时手眼漂移检测程序：
+
+  calibration/extrinsics/handeye/tools/handeye_realtime_drift_monitor.py
+  calibration/extrinsics/handeye/scripts/start_handeye_realtime_monitor.sh
+
+分日志：
+
+  docs/HANDEYE_20260723_CERES_DRIFT_INJECTION_LOG.md
+
+现场现象：
+
+  1. 机械臂和 ChArUco 大板完全静止时，`original` 基本正常。
+  2. 机械臂或标定板运动后，`original trans/rot mean` 会升高。
+  3. 当前回退版中，运动停止后该统计不会主动快速回落。
+
+临时修改与回退：
+
+  1. 曾临时加入 image sequence 去重、image stamp 显示、`timestamp_tf`
+     pose source 和静止采样门控。
+  2. 由于静止门控默认阈值过紧，现场出现 `sample gate` 经常黄色的问题。
+  3. 按用户要求，实时监控程序已回退到修改前行为：
+
+       pose source choices: rtde, tf
+       default pose source: rtde
+       no sample gate
+       no stillness threshold filtering
+       no timestamp_tf lookup
+       no image sequence duplicate suppression
+
+  4. 当前 realtime launcher 使用大板参数：
+
+       square_length_m = 0.040
+       marker_length_m = 0.030
+
+  5. 当前 realtime launcher 的旋转漂移环境变量是：
+
+       HANDEYE_DRIFT_ROLL_DEG
+       HANDEYE_DRIFT_PITCH_DEG
+       HANDEYE_DRIFT_YAW_DEG
+
+     注意：Ceres correction launcher 仍使用 `HANDEYE_DRIFT_RX_DEG / RY / RZ`。
+
+当前解释：
+
+  当前 realtime monitor 的 `original trans/rot mean` 是历史样本相对 locked
+  reference 的统计，不是当前单帧误差。程序没有运动过滤，运动过程中的样本会被
+  append 到历史窗口。如果标定板移动，原 reference 必须按 `r` 重建。如果只移动
+  机械臂且板不动，但历史窗口刷新后仍不恢复，应继续查图像时间与机器人位姿时间
+  不同步、hand-eye 跨姿态一致性、ChArUco 位姿估计和 active TCP offset。
+
+RTDE / TF / UR driver 检查：
+
+  1. `rtde_receive.RTDEReceiveInterface("192.168.1.10")` 可读：
+
+       getActualTCPPose: readable
+       getActualQ: readable
+
+  2. 机器人网络端口可达：
+
+       30001 primary
+       30004 RTDE
+       29999 dashboard
+
+  3. 检查时 ROS graph 只有相机节点，`/joint_states` 不存在，`base -> tool0`
+     TF 不存在。
+
+  4. 尝试启动 `scripts/robot/start_ur5_driver.sh`，未发送任何运动命令。启动失败：
+
+       [FATAL] [URPositionHardwareInterface]: Could not get configuration package within timeout, are you connected to the robot?(Configured timeout: 1 sec)
+       ERROR: UR5 driver failed after 3 attempts due to configuration package timeout.
+
+  5. Dashboard 只读状态：
+
+       Robotmode: RUNNING
+       Safetystatus: NORMAL
+       programState: STOPPED null
+       get loaded program: No program loaded
+
+结论：
+
+  1. RTDE 当前可继续作为只读位姿来源。
+  2. UR driver 当前不可用，`HANDEYE_POSE_SOURCE=tf` 暂时不能用于 realtime monitor。
+  3. 若后续要启用 TF，需要先在示教器加载并播放只包含 External Control 的程序，
+     或由用户单独明确授权 `headless_mode:=true` 启动。
+
+操作说明：
+
+  本次没有执行机器人运动，没有使用 sudo，没有执行 Git 写操作。日志为追加记录。
+
+English:
+
+This update records the field debugging and rollback of the realtime hand-eye
+drift monitor.
+
+Detailed log:
+
+  docs/HANDEYE_20260723_CERES_DRIFT_INJECTION_LOG.md
+
+The monitor was temporarily extended with image sequence de-duplication, image
+stamp display, `timestamp_tf`, and a stillness sample gate. Because the default
+stillness thresholds were too tight in the live RTDE signal, the gate frequently
+turned yellow even while the robot appeared static. At the user's request, the
+realtime monitor was rolled back to the previous basic behavior: `rtde` or
+latest `tf` pose source, no sample gate, no `timestamp_tf`, and no image
+sequence duplicate suppression.
+
+The current large-board realtime launcher uses:
+
+  square_length_m = 0.040
+  marker_length_m = 0.030
+
+The current realtime rotation drift variables are `HANDEYE_DRIFT_ROLL_DEG`,
+`HANDEYE_DRIFT_PITCH_DEG`, and `HANDEYE_DRIFT_YAW_DEG`. The Ceres correction
+launcher still uses `HANDEYE_DRIFT_RX_DEG / RY / RZ`.
+
+The observed behavior is consistent with the current statistic design:
+`original trans/rot mean` is a history-window error against a locked reference,
+not a current-frame-only value. Motion frames are appended. If the board moves,
+the reference must be rebuilt with `r`. If only the robot moves and the board
+stays fixed, persistent high error after the history window refreshes points to
+image/robot time mismatch, cross-pose hand-eye inconsistency, ChArUco pose
+issues, or an active TCP offset mismatch.
+
+RTDE was verified readable, and robot ports 30001 / 30004 / 29999 were
+reachable. The UR driver was not available in ROS at check time: `/joint_states`
+and `base -> tool0` TF were missing. A no-motion startup attempt of
+`scripts/robot/start_ur5_driver.sh` failed with:
+
+  [FATAL] [URPositionHardwareInterface]: Could not get configuration package within timeout, are you connected to the robot?(Configured timeout: 1 sec)
+  ERROR: UR5 driver failed after 3 attempts due to configuration package timeout.
+
+Dashboard status was `Robotmode: RUNNING`, `Safetystatus: NORMAL`,
+`programState: STOPPED null`, and no loaded program. Therefore
+`HANDEYE_POSE_SOURCE=tf` is not usable until the UR driver is successfully
+started.
+
+Operation note:
+
+  No robot motion command was executed, no sudo was used, and no Git write
+  operation was performed. This was an append-only log update.
+
+Continuous drift correction monitor (not yet field-tested):
+
+  `calibration/extrinsics/handeye/tools/handeye_continuous_drift_correction_monitor.py`
+  reads RGB images and timestamp-matched `base -> tool0` TF, detects possible
+  hand-eye drift, automatically collects qualified observations, and uses Ceres
+  to calculate a candidate correction. The display shows the correction and
+  validation error before and after applying it to the current extrinsic.
+
+  The candidate is virtual only: the program does not write a new hand-eye YAML,
+  publish TF, or command robot motion. This workflow has not yet been tested on
+  the real Gemini 335 camera and UR5 environment.
+
+2026-08-01 Dynamic SE(3) correction baseline note
+-------------------------------------------------
+
+Detailed log:
+
+  docs/DYNAMIC_HANDEYE_SE3_CORRECTION_LOG.md
+
+Summary:
+
+  Today's dynamic injection tests showed that the injected run's total correction
+  must be compared against an independently collected no-injection dynamic
+  baseline. The injected total correction includes both the real dynamic system
+  residual and the inverse of the virtual injection, so judging the injected run
+  alone is misleading.
+
+  No-injection baseline candidate:
+
+    dynamic_se3_20260801_142459/results/correction_020.yaml
+    DeltaX_tool = [+2.501, +4.093, -0.761] mm
+
+  Tool X +5 mm injection candidate:
+
+    dynamic_se3_20260801_134944/results/correction_020.yaml
+    DeltaX_tool = [-2.564, +4.017, -0.532] mm
+    Relative to baseline = [-5.066, -0.076, +0.228] mm
+
+  Tool Y -5 mm injection candidate:
+
+    dynamic_se3_20260801_144040/results/correction_020.yaml
+    DeltaX_tool = [+2.565, +8.504, -2.922] mm
+    Relative to baseline = [+0.064, +4.411, -2.161] mm
+
+  Therefore the X injection result is close to the expected inverse injection,
+  while the Y injection has the correct sign and a clear Y response but still
+  contains Z coupling. These runs were candidate results only; the latest
+  displayed sessions stopped at stable correction updates 1/2.
+
+  The live dynamic correction script now supports `--no-injection` and prints
+  `Candidate correction (not yet validated)` before the strict validation gate
+  is fully passed.
+
+Operation note:
+
+  No robot motion command was executed by Codex, no sudo was used, and no Git
+  write operation was performed.

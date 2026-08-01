@@ -1,0 +1,10 @@
+2026-08-01 22:40:41,000 INFO session started; process_rate_hz=5.0 status_rate_hz=2.0 ros_spin_rate_hz=100.0 image_queue_depth=1
+2026-08-01 22:40:59,336 INFO processed=30 valid=3 dropped_latest=71 last_reject=
+2026-08-01 22:41:01,361 INFO optimization training=4 holdout=1 status=ok rank=9 condition=43323.919316494896 validation=waiting for independent holdout samples (1/4)
+2026-08-01 22:41:11,072 INFO optimization training=8 holdout=2 status=ok rank=9 condition=2764.9411328030765 validation=waiting for independent holdout samples (2/4)
+2026-08-01 22:41:15,350 INFO optimization training=12 holdout=3 status=ok rank=9 condition=2193.6296000800776 validation=waiting for independent holdout samples (3/4)
+2026-08-01 22:41:16,803 INFO optimization training=12 holdout=4 status=ok rank=9 condition=2193.6296000800776 validation=training condition number exceeds validation limit
+2026-08-01 22:41:19,045 INFO processed=60 valid=18 dropped_latest=147 last_reject=TCP speed limit
+2026-08-01 22:41:30,805 INFO processed=90 valid=18 dropped_latest=196 last_reject=TCP speed limit
+2026-08-01 22:41:35,303 INFO optimization training=16 holdout=5 status=ok rank=9 condition=58.62839557567268 validation=correction update is not stable
+2026-08-01 22:41:45,193 INFO optimization training=20 holdout=6 status=ok rank=9 condition=51.137199418181424 validation=waiting for stable correction updates (1/2)

@@ -6,12 +6,19 @@
 - 当前工作目标：UR5 + Orbbec Gemini335 的相机内参、RTDE 位姿读取和手眼标定路径验证。
 - 当前 RGB 相机分辨率：Gemini335 `1920x1080 @ 30 fps`，ROS 实测约 `14 Hz`。
 - 当前 Gemini335 RGB 内参文件：`calibration/rgb_intrinsics/results/rgb_intrinsics_gemini335_1920x1080.yaml`。
-- 当前使用的 ChArUco 小板：`6x6 squares`、方格 `25 mm`、marker `18 mm`、`DICT_6X6_1000`、`start_id=233`。
-- 当前已验证路径：Gemini335 图像采集、ChArUco 检测、`ur_rtde` 读取 UR5 TCP pose / joints、单帧 `T_base_tool` + `T_camera_target` 采集流程。
-- 当前尚未完成：Gemini335 相机固定件安装后的正式多姿态手眼采集、求解和精度验证。
+- 当前默认 ChArUco 大板：`6x6 squares`、方格 `40 mm`、marker `30 mm`、`DICT_6X6_1000`、`start_id=233`。
+- 当前默认 RGB 手眼外参：`calibration/extrinsics/handeye/handeye_tool0_camera_color_optical.yaml`。
+- 当前已验证路径：Gemini335 图像采集、ChArUco 检测、UR ROS 2 joint/TF 读取、自动关节轨迹采集、Park 手眼求解和 live validation。
+
+## 2026-08-01 动态修正量采样记录
+
+- 现象：`+5 mm`（tool X、左乘）的虚拟误差实验曾输出 `[-2.622, +3.823, -1.383] mm`，偏离理论逆修正 `[-5, 0, 0] mm`。
+- 原因：总修正量同时包含原始 `X0` 的物理残差与人为注入量；不能假设未注入时的基线修正为零。该次总修正加回注入的 `+5 mm X` 后为约 `[+2.378, +3.823, -1.383] mm`，表明它与基线残差叠加一致。
+- 修改：保留动态运动采样的 `3 cm/s、3 deg/s` 门槛；删除会代数恒等恢复已知注入量的“仅注入修正量”。每第 4 个合格动态样本改为不参与拟合的独立 holdout，只有 holdout 误差下降、求解条件数合格且修正连续稳定后才显示可用。不会发布 TF、写入 X0 或驱动机械臂。
+- 当前尚未完成：当前安装状态下的 RGB-D alignment validation、TCP、夹爪工具轴映射和静态目标 base 坐标误差验证。
 - 当前总日志：`docs/HANDEYE_TOTAL_LOG.txt`。
 
-注意：DaBai 相机时代的有效 RGB 手眼外参 session 为 `calibration/extrinsics/handeye/sessions/20260630_195009`，外参文件为 `calibration/extrinsics/handeye/sessions/latest/handeye_result.yaml`。这些结果只对应当时的 DaBai 相机和末端安装状态，换成 Gemini335 后不能直接用于当前机器人视觉操作。
+注意：DaBai 相机时代的 RGB 手眼外参 session `calibration/extrinsics/handeye/sessions/20260630_195009` 仅作为历史结果保留，不再作为默认标定结果使用。
 
 ## 目录
 
@@ -77,6 +84,41 @@ python3 calibration/extrinsics/handeye/tools/handeye_capture_rtde.py
 ```bash
 ./calibration/extrinsics/handeye/scripts/start_handeye_live_validate.sh
 ```
+
+打开实时视频偏差监控窗口：
+
+```bash
+./calibration/extrinsics/handeye/scripts/start_handeye_realtime_monitor.sh
+```
+
+带人为漂移打开实时监控窗口：
+
+```bash
+HANDEYE_DRIFT_X_M=0.005 \
+./calibration/extrinsics/handeye/scripts/start_handeye_realtime_monitor.sh
+```
+
+模拟手眼漂移并记录 validation 样本：
+
+```bash
+HANDEYE_DRIFT_X_M=0.005 \
+HANDEYE_LIVE_OUTPUT=/tmp/live_validation_drift_x5mm.jsonl \
+./calibration/extrinsics/handeye/scripts/start_handeye_live_validate.sh
+```
+
+使用 Ceres 自动估计漂移修正量：
+
+```bash
+cmake -S calibration/extrinsics/handeye/tools -B /tmp/handeye_ceres_build
+cmake --build /tmp/handeye_ceres_build
+/tmp/handeye_ceres_build/optimize_handeye_drift_ceres \
+  --samples /tmp/live_validation_drift_x5mm.jsonl \
+  --handeye calibration/extrinsics/handeye/handeye_tool0_camera_color_optical.yaml \
+  --applied-drift-xyz-m 0.005 0 0 \
+  --applied-drift-rpy-deg 0 0 0
+```
+
+如果 CMake 报找不到 `CeresConfig.cmake`，需要先安装 Ceres 开发包；本项目不会自动执行 `sudo` 安装。
 
 ## 关键文档
 

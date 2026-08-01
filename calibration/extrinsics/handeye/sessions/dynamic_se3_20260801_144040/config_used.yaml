@@ -1,0 +1,91 @@
+interfaces:
+  image_topic: /camera/color/image_raw
+  tf_topic: /tf
+  base_frame: base
+  tool_frame: tool0
+  camera_frame: camera_color_optical_frame
+  board_frame: charuco_board
+  expected_clock_domain: ros
+paths:
+  intrinsics: /home/z/Apps-my/calibration/rgb_intrinsics/results/rgb_intrinsics_gemini335_1920x1080.yaml
+  original_handeye: /home/z/Apps-my/calibration/extrinsics/handeye/handeye_tool0_camera_color_optical.yaml
+  output_root: /home/z/Apps-my/calibration/extrinsics/handeye/sessions
+  self_test_report: /home/z/Apps-my/calibration/extrinsics/handeye/dynamic_handeye_se3_self_test_report.yaml
+board:
+  squares_x: 6
+  squares_y: 6
+  square_length_m: 0.04
+  marker_length_m: 0.03
+  dictionary_id: DICT_6X6_1000
+  start_id: 233
+quality:
+  min_charuco_corners: 20
+  max_reprojection_rms_px: 1.0
+  min_laplacian_variance: 80.0
+  min_edge_margin_px: 12
+sync:
+  ideal_max_time_error_sec: 0.005
+  optimize_max_time_error_sec: 0.01
+  save_only_max_time_error_sec: 0.02
+  tf_history_sec: 10.0
+live:
+  image_queue_depth: 1
+  max_process_rate_hz: 5.0
+  max_status_rate_hz: 2.0
+  max_ros_spin_rate_hz: 100.0
+  max_tf_wait_sec: 1.5
+  startup_tf_timeout_sec: 5.0
+motion:
+  max_tcp_linear_speed_m_s: 0.03
+  max_tcp_angular_speed_deg_s: 3.0
+  max_linear_acceleration_m_s2: 0.1
+  max_angular_acceleration_deg_s2: 20.0
+  direction_change_min_translation_m: 0.0005
+  direction_change_cosine_min: -0.25
+selection:
+  min_new_translation_m: 0.0005
+  min_new_rotation_deg: 0.1
+  near_duplicate_translation_m: 0.00025
+  near_duplicate_rotation_deg: 0.05
+optimization:
+  mode: translation_only
+  loss: huber
+  huber_f_scale_m: 0.001
+  rotation_weight_m_per_rad: 0.05
+  min_samples: 4
+  update_every_valid_samples: 4
+  max_translation_m: 0.02
+  max_rotation_deg: 5.0
+  max_nfev: 300
+  jacobian_rank_tolerance: 1.0e-08
+  min_jacobian_rank: 3
+  max_condition_number: 1.0e10
+  known_base_board_matrix: null
+validation:
+  holdout_every_n_samples: 4
+  min_holdout_samples: 4
+  max_condition_number: 500.0
+  max_holdout_rms_m: 0.001
+  max_after_before_ratio: 0.8
+  max_update_translation_m: 0.001
+  max_update_rotation_deg: 0.2
+  required_stable_updates: 2
+storage:
+  save_all_images: false
+  save_annotated_images: false
+  image_extension: png
+injection:
+  enabled: true
+  translation_mm:
+  - 0.0
+  - -5.0
+  - 0.0
+  rotation_rotvec_deg:
+  - 0.0
+  - 0.0
+  - 0.0
+  frame: tool
+  multiplication: left
+apply:
+  publish_tf: false
+  overwrite_original_handeye: false
