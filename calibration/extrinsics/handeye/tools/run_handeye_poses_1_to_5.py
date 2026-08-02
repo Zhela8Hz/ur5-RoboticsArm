@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""从当前位姿低速移动到已示教的位姿 2，再依次运行到位姿 5。
+"""从当前位姿低速移动到已示教的位姿 2，再依次运行到位姿 10。
 
 默认只进行接口、关节顺序和当前位置检查。只有传入 ``--execute`` 才会向真实机器人发送轨迹。
 
-该程序不使用位姿 1。它从当前机器人关节状态出发，依次发送位姿 2、3、4、5。
+该程序不使用位姿 1。它从当前机器人关节状态出发，依次发送位姿 2 到 10。
 """
 
 import argparse
@@ -29,6 +29,8 @@ ACTION_NAME = '/scaled_joint_trajectory_controller/follow_joint_trajectory'
 JOINT_STATE_TOPIC = '/joint_states'
 BASE_FRAME = 'base'
 TOOL_FRAME = 'tool0'
+FIRST_POSE_ID = 2
+LAST_POSE_ID = 10
 
 # 低速安全指标。零速、零加速度端点的五次时间标度轨迹峰值分别为
 # 1.875*delta/T 和 (10/sqrt(3))*delta/T^2。
@@ -106,16 +108,17 @@ def load_poses(trajectory_path):
     if not isinstance(waypoints, list):
         raise RuntimeError(f'{trajectory_path} has no waypoint list.')
     selected = {item.get('id'): item for item in waypoints if isinstance(item, dict)}
-    missing = [pose_id for pose_id in range(2, 6) if pose_id not in selected]
+    pose_ids = range(FIRST_POSE_ID, LAST_POSE_ID + 1)
+    missing = [pose_id for pose_id in pose_ids if pose_id not in selected]
     if missing:
         raise RuntimeError(f'{trajectory_path} is missing pose IDs: {missing}.')
-    poses = [selected[pose_id] for pose_id in range(2, 6)]
+    poses = [selected[pose_id] for pose_id in pose_ids]
     joint_names = poses[0].get('joint_names')
     if not isinstance(joint_names, list) or not joint_names:
-        raise RuntimeError('Pose 1 has no valid joint_names.')
-    for pose_id, pose in enumerate(poses, start=2):
+        raise RuntimeError(f'Pose {FIRST_POSE_ID} has no valid joint_names.')
+    for pose_id, pose in zip(pose_ids, poses):
         if pose.get('joint_names') != joint_names:
-            raise RuntimeError(f'Pose {pose_id} joint_names differ from pose 2.')
+            raise RuntimeError(f'Pose {pose_id} joint_names differ from pose {FIRST_POSE_ID}.')
         positions = pose.get('joint_positions_rad')
         if not isinstance(positions, list) or len(positions) != len(joint_names):
             raise RuntimeError(f'Pose {pose_id} has invalid joint_positions_rad.')
@@ -296,10 +299,10 @@ def main():
             print('Dry run complete. No trajectory was sent. Re-run with --execute only after a separate motion authorization.')
             return 0
         print('WARNING: This directly sends joint trajectories without MoveIt collision planning.')
-        print('Executing poses 2, 3, 4, 5 because --execute was provided.')
+        print(f'Executing poses {FIRST_POSE_ID} through {LAST_POSE_ID} because --execute was provided.')
         for pose in poses:
             send_pose(node, client, pose, expected_names, args.timeout_sec)
-        print('Completed low-speed motion from the current pose through pose 5.')
+        print(f'Completed low-speed motion from the current pose through pose {LAST_POSE_ID}.')
         return 0
     except KeyboardInterrupt:
         print('\nCtrl-C received: cancelling the active trajectory before exit.', flush=True)
